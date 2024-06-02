@@ -7,6 +7,11 @@ import Home from "../../pages/allUser/home/Home";
 import Login from "../../pages/allUser/login/Login";
 import SignUp from "../../pages/allUser/signUP/SignUp";
 import ErrorPageShow from "../../pages/errorPageShow/ErrorPageShow";
+import MedicineShop from "../../pages/allUser/medicineShop/MedicineShop";
+import CardPage from "../../pages/allUser/cardPage/CardPage";
+import PrivateRoute from "../privateRoute/PrivateRoute";
+import AllCategoryMedicine from "../../pages/allUser/allCategoryMedicines/AllCategoryMedicine";
+// import Shop from "../../pages/allUser/shop/Shop";
 
 
 
@@ -29,14 +34,18 @@ const Router = createBrowserRouter([
                 path: "/signUp",
                 element: <SignUp></SignUp>,
             },
-            // {
-            //     path: "/doctorProfile",
-            //     element: <PrivateRoute><Profile></Profile></PrivateRoute>,
-            // },
-            // {
-            //     path: "/appointment/:specialty",
-            //     element:<Appointment></Appointment>,
-            // },
+            {
+                path: "/shop",
+                element: <MedicineShop></MedicineShop>,
+            },
+            {
+                path: "/allCategoryMedicines/:category",
+                element:<AllCategoryMedicine></AllCategoryMedicine>,
+            },
+            {
+                path: "/card",
+                element:<PrivateRoute><CardPage></CardPage></PrivateRoute>,
+            },
         ]
     },
 ]);

@@ -1,0 +1,82 @@
+[
+  {
+    "_id": "665b04230fbf8318a02d5952",
+    "title": "Effective Pain Relief",
+    "category": "Analgesic",
+    "image": "https://example.com/images/pain_relief.png",
+    "numMedicines": 15,
+    "description": "Medications that help to alleviate pain and discomfort."
+  },
+  {
+    "_id": "665b04230fbf8318a02d5953",
+    "title": "Powerful Antibiotics",
+    "category": "Antibiotic",
+    "image": "https://example.com/images/antibiotics.png",
+    "numMedicines": 10,
+    "description": "Medications used to treat bacterial infections."
+  },
+  {
+    "_id": "665b04230fbf8318a02d5954",
+    "title": "Reliable Antivirals",
+    "category": "Antihistamine",
+    "image": "https://example.com/images/antivirals.png",
+    "numMedicines": 8,
+    "description": "Medications that treat viral infections."
+  },
+  {
+    "_id": "665b04230fbf8318a02d5955",
+    "title": "Effective Antifungals",
+    "category": "Antidiabetic",
+    "image": "https://example.com/images/antifungals.png",
+    "numMedicines": 12,
+    "description": "Medications used to treat fungal infections."
+  },
+  {
+    "_id": "665b04230fbf8318a02d5956",
+    "title": "Allergy Relief Solutions",
+    "category": "Statin",
+    "image": "https://example.com/images/allergy_relief.png",
+    "numMedicines": 7,
+    "description": "Medications that help to reduce symptoms of allergies."
+  },
+  {
+    "_id": "665b04230fbf8318a02d5957",
+    "title": "Cough and Cold Remedies",
+    "category": "Antihypertensive",
+    "image": "https://example.com/images/cough_cold.png",
+    "numMedicines": 20,
+    "description": "Medications that alleviate symptoms of cough and cold."
+  },
+  {
+    "_id": "665b04230fbf8318a02d5958",
+    "title": "Digestive Health Aids",
+    "category": "Antihypertensive",
+    "image": "https://example.com/images/digestive_health.png",
+    "numMedicines": 9,
+    "description": "Medications that aid in digestive health."
+  },
+  {
+    "_id": "665b04230fbf8318a02d5959",
+    "title": "Comprehensive Skin Care",
+    "category": "Antihypertensive",
+    "image": "https://example.com/images/skin_care.png",
+    "numMedicines": 14,
+    "description": "Medications and treatments for various skin conditions."
+  },
+  {
+    "_id": "665b04230fbf8318a02d5960",
+    "title": "Essential Vitamins and Supplements",
+    "category": "Antihypertensive",
+    "image": "https://example.com/images/vitamins_supplements.png",
+    "numMedicines": 25,
+    "description": "Vitamins and dietary supplements for overall health."
+  },
+  {
+    "_id": "665b04230fbf8318a02d5961",
+    "title": "Mental Health Support",
+    "category": "Antihypertensive",
+    "image": "https://example.com/images/mental_health.png",
+    "numMedicines": 6,
+    "description": "Medications for mental health conditions such as depression and anxiety."
+  }
+]

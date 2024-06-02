@@ -1,8 +1,8 @@
 import axios from "axios";
 import {  useNavigate } from "react-router-dom";
-// import useAuth from "./useAuth";
 import { useContext } from "react";
-import { AuthContext } from "../shareComponent/provider/AuthProvider";
+import { AuthContext } from "../routes/authProvider/AuthProvider";
+
 
 // import React from 'react';
 const axiosSecure = axios.create({

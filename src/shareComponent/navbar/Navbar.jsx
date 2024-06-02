@@ -4,10 +4,13 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../routes/authProvider/AuthProvider";
 import { CgProfile } from "react-icons/cg";
 import { FaCartShopping } from "react-icons/fa6";
+import { Tooltip } from "react-tooltip";
+import useCardItem from "../../hooks/useCardItem";
 // import useAppointment from '../../hooks/useAppointment';
 const Navbar = () => {
 
-    // const [ refetch ,appointmentList] =useAppointment();
+    const [ refetch ,allCardItem ] =useCardItem();
+    console.log(allCardItem)
     const { user, logOut } = useContext(AuthContext);
 
     const handleSignOut = () => {
@@ -40,27 +43,22 @@ const Navbar = () => {
         <li className="font-bold "><NavLink to="/">
             Home</NavLink>
         </li>
-        <li className="font-bold"><NavLink to="/doctorProfile">
-            Doctor Profile</NavLink>
+        <li className="font-bold"><NavLink to="/shop">
+            Shop</NavLink>
         </li>
-        <li className="font-bold"><NavLink to="/appointment/Tooth Extraction">Appointment</NavLink>
+        <li className="font-bold">
+            <NavLink to='card'>
+                <FaCartShopping /><span>{allCardItem.length}</span>
+            </NavLink>
         </li>
-
-        <li>
-                <Link to='/dashboard/cart'>
-                    <button className="btn">
-                    <FaCartShopping />
-                        <div className="badge badge-secondary">+100</div>
-                    </button>
-                </Link>
-            </li>
 
 
 
 
     </>
+    // fixed
     return (
-        <div className="navbar fixed z-10 bg-opacity-30 bg-black max-w-screen-xl text-white ">
+        <div className="navbar  z-10 bg-opacity-30 bg-black max-w-screen-xl text-white ">
             <div className="navbar-start">
                 <div className="dropdown z-50">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -76,15 +74,22 @@ const Navbar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 text-lg">
                     {links}
-                    <div className="dropdown dropdown-end">
-
-                        <div tabIndex={0} role="button" className="btn font-bold btn-ghost  text-lg rounded-btn">My Profile <CgProfile /> </div>
-                        <ul tabIndex={0} className="menu dropdown-content z-[10] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
-                            <li className="font-bold"><NavLink to="/manageMyPost">Manage My Post</NavLink></li>
-                            <li className="font-bold"><NavLink to="/needVolunteer">Add Volunteer Post</NavLink></li>
-                            <li className="font-bold"><NavLink to="/clintRequest">All Volunteer Request</NavLink></li>
+                    {user && <div className="dropdown dropdown-end">
+                    {/* btn-ghost rounded-btn */}
+                        <div tabIndex={0} role="button" className="btn font-bold   text-lg ">
+                            <div data-tooltip-id="my-tooltip" className=" relative group">
+                                <img src={user.photoURL ? user.photoURL : `https://i.ibb.co/qW320MT/images.jpg`} className="rounded-full w-10 h-10" />
+                            </div>
+                        </div>
+                        <ul tabIndex={0} className="menu dropdown-content z-[10] p-2 shadow bg-base-300 rounded-box w-52 mt-4">
+                            <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
+                            <li className="font-bold"><NavLink to="/dashboard">Dashboard</NavLink></li>
+                            <li className="font-bold"><button onClick={handleSignOut} className="">
+                        Log Out
+                    </button></li>
                         </ul>
                     </div>
+                    }
 
 
 
@@ -101,9 +106,19 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-            
 
+            {/* 
+            {
+                user &&
+                <span className="font-bold mr-4">
+                    <NavLink to="">
+                        <div data-tooltip-id="my-tooltip" className=" relative group">
+                            <img src={user.photoURL ? user.photoURL : `https://i.ibb.co/qW320MT/images.jpg`} className="rounded-full w-10 h-10" />
+                        </div>
 
+                    </NavLink>
+                </span>
+            } */}
 
             <div className="navbar-end ">
                 {

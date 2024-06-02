@@ -70,26 +70,26 @@ const AuthProvider = ({ children }) => {
                 // const userEmail = currentUser?.email || user?.email;
                 const loggedUser = { email: currentUser?.email }
 
-                // axiosPublic.post('/jwt', loggedUser)
-                //     .then(res => {
-                //         if (res.data.token) {
-                //             localStorage.setItem('access-token', res.data.token);
-                //             setLoading(false);
-                //         }
-                //     })
+                axiosPublic.post('/jwt', loggedUser)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token);
+                            setLoading(false);
+                        }
+                    })
             }
             else {
-                // localStorage.removeItem('access-token');
-                // setLoading(false);
+                localStorage.removeItem('access-token');
+                setLoading(false);
             }
-            setLoading(false)
+            // setLoading(false)
             
 
         });
         return () => {
             unSubscribe();
         }
-    }, [])
+    }, [axiosPublic])
 // }, [axiosPublic])
 
 

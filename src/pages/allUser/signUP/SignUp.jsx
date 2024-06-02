@@ -8,7 +8,8 @@ import Swal from "sweetalert2";
 import { Fade } from "react-awesome-reveal";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-
+const image_hosting_key = import.meta.env.VITE_IMAGE_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const SignUp = () => {
 
     const axiosPublic = useAxiosPublic();
@@ -25,8 +26,8 @@ const SignUp = () => {
 
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        const { email, password, role , name, photoUrl } = data;
+    const onSubmit = async (data) => {
+        const { email, password, role, name, image } = data;
         // console.log(name, email, password, photoUrl)
 
 
@@ -50,37 +51,51 @@ const SignUp = () => {
         setRegisterError('');
         setSuccess('');
 
-        createUser(email, password)
-            .then(() => {
-                updateUserProfile(name, photoUrl,role)
-                    .then(() => {
-                        // create user entry in the dataBase
-                        const userInfo = {
-                            name: name,
-                            email: email,
-                            role:role,
-                        }
-                        axiosPublic.post('/user', userInfo)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    Swal.fire({
-                                        position: "top-center",
-                                        icon: "success",
-                                        title: "User create successfully",
-                                        showConfirmButton: false,
-                                        timer: 2500
-                                    });
-                                    navigate('/')
-                                    //   window.location.reload();
-                                }
-                            })
-                    })
-            })
-            .catch(error => {
-                console.error(error);
-                setRegisterError(error.message);
-                toast.success("Fail to Register");
-            })
+
+        const image_file = { image: data.image[0] }
+        const res = await axiosPublic.post(image_hosting_api, image_file, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        if (res.data.success) {
+
+            createUser(email, password)
+                .then(() => {
+                    const photoUrl =res.data.data.display_url;
+                    updateUserProfile(name, photoUrl, role)
+                        .then(() => {
+                            // create user entry in the dataBase
+                            const userInfo = {
+                                name: name,
+                                email: email,
+                                role: role,
+                            }
+                            axiosPublic.post('/user', userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        Swal.fire({
+                                            position: "top-center",
+                                            icon: "success",
+                                            title: "User create successfully",
+                                            showConfirmButton: false,
+                                            timer: 2500
+                                        });
+                                        navigate('/')
+                                        //   window.location.reload();
+                                    }
+                                })
+                        })
+                })
+                .catch(error => {
+                    console.error(error);
+                    setRegisterError(error.message);
+                    toast.success("Fail to Register");
+                })
+
+        }
+
+
     }
 
 
@@ -122,10 +137,12 @@ const SignUp = () => {
                             </div>
 
                             <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Photo Url</span>
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text">Image</span>
+                                    </div>
+                                    <input {...register("image", { required: true })} type="file" className="file-input file-input-bordered w-full " />
                                 </label>
-                                <input type="text" name="photoUrl" placeholder="photoUrl" className="input input-bordered" required {...register("photoUrl", { required: true })} />
                             </div>
 
                             <div>
