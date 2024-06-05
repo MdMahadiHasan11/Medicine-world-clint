@@ -32,11 +32,15 @@ const AllCategoryMedicine = () => {
             const bookingDetails = {
                 userEmail: user.email,
                 medicineId: medicine._id,
-                medicineName: medicine.name,               
+                medicinesName: medicine.medicinesName,               
                 perUnitPrice: medicine.perUnitPrice,
                 discountPercentage: medicine.discountPercentage,
                 category:medicine.category,
                 massUnit:medicine.massUnit,
+                company:medicine.company,
+                grandTotal : medicine.grandTotal,
+                quantity : 1
+
 
 
 

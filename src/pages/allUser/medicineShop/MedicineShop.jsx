@@ -18,15 +18,20 @@ const MedicineShop = () => {
     const [ refetch ,allCardItem ] =useCardItem();
     //
     const handleAddCard = (medicine) => {
+        console.log(medicine._id)
         if (user && user.email) {
             const bookingDetails = {
                 userEmail: user.email,
                 medicineId: medicine._id,
-                medicineName: medicine.name,               
+                medicinesName: medicine.name,               
                 perUnitPrice: medicine.perUnitPrice,
                 discountPercentage: medicine.discountPercentage,
                 category:medicine.category,
                 massUnit:medicine.massUnit,
+                company:medicine.company,
+                grandTotal : medicine.grandTotal,
+                quantity : 1
+
 
 
 

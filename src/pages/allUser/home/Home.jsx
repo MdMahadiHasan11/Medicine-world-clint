@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../routes/authProvider/AuthProvider";
 import Banner from "./banner/Banner";
 import Category from "./category/Category";
+import DiscountSlider from "./discountSlider/DiscountSlider";
 
 const Home = () => {
     const [isAdmin ]= useAdmin();
@@ -15,6 +16,7 @@ const Home = () => {
             <Banner></Banner>
             <div className="my-10">Title:Category</div>
             <Category></Category>
+            <DiscountSlider></DiscountSlider>
             { isAdmin ? 'admin aseeeeeeeeee' : 'admin nai'}
             <div>{ isSeller ? 'Seller aseeeeeeeeee' : 'seller nai'}</div>
            <div> { user ? 'user name  ' +user.displayName : 'user nai'} </div>
