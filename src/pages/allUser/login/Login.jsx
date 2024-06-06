@@ -39,6 +39,7 @@ const axiosPublic=useAxiosPublic();
                 // user store api
                 const userInfo ={
                     email:result.user?.email,
+                    image:result.user?.photoURL,
                     name:result.user?.displayName,
                     role:'user'
                 }

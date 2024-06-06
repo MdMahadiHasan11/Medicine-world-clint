@@ -68,6 +68,7 @@ const SignUp = () => {
                             // create user entry in the dataBase
                             const userInfo = {
                                 name: name,
+                                image:photoUrl,
                                 email: email,
                                 role: role,
                             }

@@ -23,7 +23,7 @@ const MedicineShop = () => {
             const bookingDetails = {
                 userEmail: user.email,
                 medicineId: medicine._id,
-                medicinesName: medicine.name,               
+                medicinesName: medicine.medicinesName,               
                 perUnitPrice: medicine.perUnitPrice,
                 discountPercentage: medicine.discountPercentage,
                 category:medicine.category,
@@ -36,6 +36,7 @@ const MedicineShop = () => {
 
 
             }
+            console.log('checkkkkkkkk',bookingDetails);
             axiosSecure.post(`/addCard`, bookingDetails)
                 .then(res => {
                     if (res.data.insertedId) {

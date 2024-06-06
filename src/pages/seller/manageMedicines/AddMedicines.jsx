@@ -43,10 +43,9 @@ const AddMedicines = ({ onClose,userMedicineRefetch }) => {
     const { user } = useAuth();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+
     const onSubmit = async (data) => {
         const { medicineName, genericName,image, company, description, category, massUnit, perUnitPrice, discountPercentage } = data;
-// image
-//  console.log(category,'+',medicineName,data);
         const image_file = { image: data.image[0] }
         const res = await axiosPublic.post(image_hosting_api, image_file,
             {

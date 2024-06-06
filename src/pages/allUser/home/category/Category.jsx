@@ -1,13 +1,22 @@
 import  { useEffect, useState } from 'react';
 import CategoryCard from './CategoryCard';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const Category = () => {
-    const [category, setCategory] = useState([]);
-    useEffect(() => {
-        fetch('category.json')
-            .then(res => res.json())
-            .then(data => setCategory(data))
-    }, [])
+    const axiosSecure = useAxiosSecure();
+
+    const { data: category = [], refetch } = useQuery({
+        queryKey: ['category'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/allCategory`)
+            return res.data;
+        }
+    })
+    // const allCategory = allCategories.map(item => item.category);
+    // console.log('category',allCategory);
+
+
     return (
         <div>
             <div className="container mx-auto">
