@@ -29,7 +29,7 @@ const Banner = () => {
             </div> */}
             {
                 activeBanner.map((banner) => <div key={banner._id}>
-                    <img src={banner.image} alt="Your Image" className="w-full max-h-[400px]" />
+                    <img src={banner.image} alt="Your Image" className="w-full max-h-[500px]" />
                     <p className="legend">{banner.bannerHeader
                     }</p>
                 </div>)

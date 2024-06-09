@@ -3,13 +3,28 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../routes/authProvider/AuthProvider";
 import { CgProfile } from "react-icons/cg";
-import { FaCartShopping } from "react-icons/fa6";
+import { FaCartShopping, FaRegUser } from "react-icons/fa6";
 import { Tooltip } from "react-tooltip";
 import useCardItem from "../../hooks/useCardItem";
 // import useAppointment from '../../hooks/useAppointment';
+// import ReactLanguageSelect from 'react-languages-select';
+// import LanguageSelect from 'react-languages-select';
+
+// import 'react-languages-select/scss/react-languages-select.scss';
+// //import css module
+// import 'react-languages-select/css/react-languages-select.css';
+
+
+import logo1 from '../../../public/image/logo1.png'
+import { GrLanguage } from "react-icons/gr";
+import useAdmin from "../../hooks/useAdmin";
+import useSeller from "../../hooks/useSeller";
 const Navbar = () => {
 
-    const [ refetch ,allCardItem ] =useCardItem();
+    const [isAdmin] = useAdmin();
+    const [isSeller] = useSeller();
+
+    const [refetch, allCardItem] = useCardItem();
     console.log(allCardItem)
     const { user, logOut } = useContext(AuthContext);
 
@@ -56,89 +71,107 @@ const Navbar = () => {
 
 
     </>
+
+    console.log(theme)
     // fixed
     return (
-        <div className="navbar  z-10 bg-opacity-30 bg-black max-w-screen-xl text-white ">
+        <div className="navbar fixed z-10 bg-opacity-30 bg-black max-w-screen-xl text-white">
             <div className="navbar-start">
-                <div className="dropdown z-50">
+                {/* <div className="dropdown z-50">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-lg">
                         {links}
                     </ul>
-                </div>
+                </div> */}
                 {/* bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 */}
-                <NavLink to="/" className="     font-bold lg:text-3xl md:text-2xl text-xl"><p className='px-2 rounded-3xl '>Doctor House</p></NavLink>
+                <NavLink to="/" className="  flex  justify-center items-center  font-bold lg:text-3xl md:text-2xl">
+                    <img className="w-24 h-20" src={logo1} alt="" />
+                    <p className=''>Medicines-World</p>
+
+                </NavLink>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 text-lg">
                     {links}
-                    {user && <div className="dropdown dropdown-end">
-                    {/* btn-ghost rounded-btn */}
-                        <div tabIndex={0} role="button" className="btn font-bold   text-lg ">
-                            <div data-tooltip-id="my-tooltip" className=" relative group">
-                                <img src={user.photoURL ? user.photoURL : `https://i.ibb.co/qW320MT/images.jpg`} className="rounded-full w-10 h-10" />
-                            </div>
-                        </div>
-                        <ul tabIndex={0} className="menu dropdown-content z-[10] p-2 shadow bg-base-300 rounded-box w-52 mt-4">
-                            <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
-                            <li className="font-bold"><NavLink to="/userDashboard"> User Dashboard</NavLink></li>
-                            <li className="font-bold"><NavLink to="/adminDashboard"> admin Dashboard</NavLink></li>
-                            <li className="font-bold"><NavLink to="/sellerDashboard"> seller Dashboard</NavLink></li>
-                            <li className="font-bold"><button onClick={handleSignOut} className="">
-                        Log Out
-                    </button></li>
-                        </ul>
-                    </div>
-                    }
-
-
-
                 </ul>
             </div>
-            <div className="navbar-center flex lg:hidden">
-                <div className="dropdown dropdown-end">
-
-                    <div tabIndex={0} role="button" className="btn font-bold btn-ghost  text-4xl rounded-btn mx-1"><CgProfile /> </div>
-                    <ul tabIndex={0} className="menu dropdown-content z-[10] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
-                        <li className="font-bold"><NavLink to="/manageMyPost">Manage My Post</NavLink></li>
-                        <li className="font-bold"><NavLink to="/needVolunteer">Add Volunteer Post</NavLink></li>
-                        <li className="font-bold"><NavLink to="/clintRequest">Clint Request</NavLink></li>
-                    </ul>
-                </div>
-            </div>
-
-            {/* 
-            {
-                user &&
-                <span className="font-bold mr-4">
-                    <NavLink to="">
-                        <div data-tooltip-id="my-tooltip" className=" relative group">
-                            <img src={user.photoURL ? user.photoURL : `https://i.ibb.co/qW320MT/images.jpg`} className="rounded-full w-10 h-10" />
-                        </div>
-
-                    </NavLink>
-                </span>
-            } */}
 
             <div className="navbar-end ">
                 {
-                    user ? <button onClick={handleSignOut} className="btn bg-orange-600 text-lg mr-4">
-                        Log Out
-                    </button> : <span>
-                        <button className="btn px-7 mr-4 bg-orange-600 text-lg">
-                            <NavLink to="/login">Login</NavLink>
-                        </button>
-                        <button className="btn bg-orange-600 mr-4 text-lg">
-                            <NavLink to="/signUp">Sign Up</NavLink>
-                        </button>
+                    user ?
 
-                    </span>
+                        // 
+                        <div className="dropdown mr-4 dropdown-end">
+                            {/* btn-ghost rounded-btn */}
+                            <div tabIndex={0} role="button" className=" font-bold   text-lg ">
+                                <div data-tooltip-id="my-tooltip" className=" relative group">
+                                    <img src={user.photoURL ? user.photoURL : `https://i.ibb.co/qW320MT/images.jpg`} className="rounded-full w-10 h-10" />
+                                </div>
+                            </div>
+                            <ul tabIndex={0} className={theme === 'dark' ? 'menu dropdown-content z-[10] p-2  shadow bg-base-300 rounded-box w-52 mt-4' : 'menu dropdown-content z-[10] p-2 text-black shadow bg-base-300 rounded-box w-52 mt-4'}>
+                                {
+                                    isAdmin ?
+                                        <>
+                                            <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
+                                            <li className="font-bold"><NavLink to="/adminDashboard"> admin Dashboard</NavLink></li>
+                                            <li className="font-bold">
+                                                <button onClick={handleSignOut} className="">
+                                                    Log Out
+                                                </button>
+                                            </li>
+                                        </> :
+                                        isSeller ?
+                                            <>
+                                                <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
+                                                <li className="font-bold"><NavLink to="/sellerDashboard"> seller Dashboard</NavLink></li>
+                                                <li className="font-bold"><button onClick={handleSignOut} className="">
+
+                                                    Log Out
+                                                </button></li>
+                                            </> :
+                                            <>
+                                                <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
+                                                <li className="font-bold"><NavLink to="/userDashboard"> User Dashboard</NavLink></li>
+                                                <li className="font-bold"><button onClick={handleSignOut} className="">
+
+                                                    Log Out
+                                                </button></li>
+                                            </>
+
+                                }
+                            </ul>
+                        </div>
+
+                        // 
+                        : <span>
+                            <button className="  px-5 mr-4 font-bold text-lg">
+                                <NavLink to="/login">Join US</NavLink>
+                            </button>
+                            <button className=" font-bold mr-4 text-xl">
+                                <NavLink to="/signUp"><FaRegUser /></NavLink>
+                            </button>
+
+                        </span>
 
                 }
+
+                {/* language */}
+                <div className="dropdown">
+                    <div tabIndex={0} role="button" className=" m-1 mx-2 text-2xl"><GrLanguage /></div>
+                    <ul tabIndex={0} className={theme === 'dark' ? 'dropdown-content font-bold z-10 menu p-2 shadow bg-base-100 rounded-box w-24' : 'dropdown-content z-10 font-bold menu p-2 shadow text-black bg-base-100 mb-3 rounded-box w-24'}>
+                        <li><a>English</a></li>
+                        <li><a>Hindi</a></li>
+                        <li><a>Bangla</a></li>
+                    </ul>
+                </div>
                 {/* theme */}
-                <label className="swap swap-rotate">
+
+                {/* <ReactLanguageSelect
+                    searchable={true}
+                    searchPlaceholder="Search for a language" /> */}
+                <label className="swap mr-4 ml-2 swap-rotate">
 
                     {/* this hidden checkbox controls the state */}
                     <input type="checkbox"
