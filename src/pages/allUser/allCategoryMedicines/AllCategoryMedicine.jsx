@@ -4,93 +4,120 @@ import { useParams } from "react-router-dom";
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import { FaEye } from 'react-icons/fa';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../routes/authProvider/AuthProvider';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import useCardItem from '../../../hooks/useCardItem';
+import AllCategoryMedicinesCard from './AllCategoryMedicinesCard';
+import { IoIosArrowDown } from 'react-icons/io';
+import axios from 'axios';
 
 const AllCategoryMedicine = () => {
     const { category } = useParams();
-    const [ refetch ,allCardItem ] =useCardItem();
-
     const axiosPublic = useAxiosPublic()
-    const { data: medicines = [], refetch : medicineRefetch } = useQuery({
-        queryKey: ['medicines'],
+    // 
+    const [searchText, setSearchText] = useState('');
+// sort
+    const { data: medicine = [], isLoading, refetch: medicineRefetch } = useQuery({
+        queryKey: ['medicine'],
         queryFn: async () => {
             const res = await axiosPublic.get(`/categoryMedicines/${category}`)
             return res.data;
         }
     })
-    const { user } = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();
-    const navigate = useNavigate();
-    const location = useLocation();
-    //
-    const handleAddCard = (medicine) => {
-        if (user && user.email) {
-            const bookingDetails = {
-                userEmail: user.email,
-                medicineId: medicine._id,
-                medicinesName: medicine.medicinesName,               
-                perUnitPrice: medicine.perUnitPrice,
-                discountPercentage: medicine.discountPercentage,
-                category:medicine.category,
-                massUnit:medicine.massUnit,
-                company:medicine.company,
-                grandTotal : medicine.grandTotal,
-                quantity : 1
+    const [medicines, setMedicines] = useState(medicine);
+
+    const handleDisplaySort = (sort) => {
+
+        if (sort === 'Ascending') {
+            const medicines = medicine.slice().sort((a, b) => a.grandTotal
+                - b.grandTotal);
+            setMedicines(medicines);
+
+        }
+        else if (sort === 'Descending') {
+            const medicines = medicine.slice().sort((a, b) => b.grandTotal
+                - a.grandTotal);
+            setMedicines(medicines);
+        }
+
+    };
 
 
+// sort end
 
 
-            }
-            axiosSecure.post(`/addCard`, bookingDetails)
-                .then(res => {
-                    if (res.data.insertedId) {
-                        refetch();
-                        Swal.fire({
-                            position: "top-center",
-                            icon: "success",
-                            title: "Successfully appointment",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                })
+    // const searchText
+    useEffect(() => {
+
+        if (searchText.trim() !== "") {
+            axiosPublic.get(`/search/${category}/${searchText}`)
+            .then(res => {
+                setMedicines(res.data);
+                // setLoading(false);
+            })
+            console.log('iffff')
         }
         else {
-            Swal.fire({
-                title: "You are not login",
-                text: "Please login and booked appointment",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Login"
-            }).then((result) => {
-                if (result.isConfirmed) {
 
-                    navigate('/login', { state: location.pathname });
-                }
-            });
+            axiosPublic.get(`/categoryMedicines/${category}`)
+            .then(res => {
+                setMedicines(res.data);
+                // setLoading(false);
+            })
+            console.log('else')
         }
-    }
-    // 
+
+
+    }, [searchText])
+    // useEffect(() => {
+
+
+    // }, [medicines]);
+
+
+
+
+    // loading error
+    // if (isloading) {
+    //     return <div>Loading...</div>;
+    // }
 
     return (
         <div>
+            {/* {loading ? <span className="loading loading-spinner loading-lg"></span> : ''} */}
             <p>shop:{medicines.length}</p>
+            <div className="navbar bg-gray-50 border rounded-box">
+                <div className="flex-1 px-2 lg:flex-none">
+                    <form>
+                        <div className="flex-1 px-2 lg:flex-none">
+                            <label className="input input-bordered flex items-center gap-2">
+                                <input type="text" className="grow"
+                                    name="searchText"
+                                    value={searchText} onChange={(e) => setSearchText(e.target.value)}
+                                    placeholder="Search" />
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                {/* dropdown */}
+                <div className="flex justify-center z-10 items-center">
+                    <details className="dropdown">
+                        <summary className="m-1 btn bg-orange-600">Volunteers Need Sort<IoIosArrowDown /></summary>
+                        <ul className="p-2 shadow menu dropdown-content z-10 bg-base-300  font-bold rounded-box w-52">
+
+                            <li className="border-2" onClick={() => handleDisplaySort('Ascending')}><a>Ascending</a></li>
+                            <li className="border-2" onClick={() => handleDisplaySort('Descending')}><a>Descending</a></li>
+                        </ul>
+                    </details>
+                </div>
+                {/* dropdown and icon */}
+            </div>
 
             {/* form */}
             <div className="mb-20">
-                <div className='mt-10'>
-                    <p data-aos="fade-down"
-                        data-aos-easing="ease-out-cubic"
-                        data-aos-duration="1000" className="text-3xl font-bold rounded-2xl text-center bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 py-8 mt-6 mb-2 text-white">All Medicines Table
-                    </p>
-                </div>
-
                 <div className='flex flex-col mt-6'>
                     <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
                         <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
@@ -154,69 +181,8 @@ const AllCategoryMedicine = () => {
                                         </tr>
                                     </thead>
                                     {
-                                        medicines.map((requestItem, index) =>
-                                            <tbody key={requestItem._id} className='bg-white divide-y divide-gray-200 '>
-                                                <tr>
-                                                    <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
-                                                        {index + 1}
-                                                    </td>
-                                                    <td className='px-4 py-4 text-sm text-gray-500 flex gap-3 items-center   whitespace-nowrap'>
-
-                                                        {requestItem.medicinesName}
-                                                    </td>
-
-                                                    <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
-                                                        {requestItem.genericName}
-                                                    </td>
-
-
-                                                    <td className='px-4 py-4 text-sm whitespace-nowrap'>
-                                                        <div className='flex items-center gap-x-2'>
-                                                            <p
-                                                                className='px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
-                               text-xs'
-                                                            >
-                                                                {requestItem.category}
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                    <td className='px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap'>
-                                                        <div className='inline-flex items-center px-3 py-1 rounded-full gap-x-2  '>
-                                                            {
-                                                                requestItem.massUnit
-                                                            }
-
-                                                        </div>
-                                                    </td>
-                                                    <td className='px-4 py-4 text-sm whitespace-nowrap'>
-                                                        <div className='flex items-center gap-x-2'>
-                                                            <p
-                                                                className='px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
-                               text-xs'
-                                                            >
-                                                                {requestItem.perUnitPrice}
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                    <td className='px-4 py-4 text-sm whitespace-nowrap'>
-                                                        <div className='flex items-center gap-x-2'>
-                                                            <p
-                                                                className='px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
-                               text-xs'
-                                                            >
-                                                                {requestItem.discountPercentage}%
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                    <td className='px-4 py-4 text-sm whitespace-nowrap'>
-
-
-                                                        <button onClick={() => handleAddCard(requestItem)} className="btn btn-outline btn-success  font-bold text-lg">Select</button>
-
-                                                        <Link to={`/details/${requestItem._id}`}><button className="btn btn-outline btn-success ml-5  font-bold text-lg"><FaEye></FaEye></button></Link>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                        medicines?.map((requestItem, index) =>
+                                            <AllCategoryMedicinesCard requestItem={requestItem} index={index} key={requestItem._id}></AllCategoryMedicinesCard>
                                         )
                                     }
                                 </table>

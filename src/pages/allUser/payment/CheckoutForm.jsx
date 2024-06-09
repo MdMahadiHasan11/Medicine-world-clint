@@ -20,9 +20,11 @@ const CheckoutForm = () => {
 
     const axiosSecure = useAxiosSecure();
     const [refetch, allCardItem] = useCardItem();
+    console.log('item==',allCardItem)
     
 
-    const totalPrice=allCardItem.reduce((total,medicine)=>total+medicine.grandTotal,0)
+    const totalPrice=allCardItem.reduce((total,medicine)=>total+medicine.grandTotal,0);
+    const discountPrice=(allCardItem.reduce((total,medicine)=>total+medicine.perUnitPrice,0))-totalPrice;
 
     // console.log('hooooooooooooooooooooo',totalPrice);
 
@@ -45,6 +47,7 @@ const CheckoutForm = () => {
     const handleSubmit = async (event) => {
 
         event.preventDefault();
+        console.log('total==',totalPrice)
 
         if (!stripe || !elements) {
 
@@ -89,11 +92,13 @@ const CheckoutForm = () => {
 
                 const payment ={
                     email:user.email,
+                    discountPrice:discountPrice,
                     grandTotal : totalPrice,
                     transactionId:paymentIntent.id,
                     date:new Date(),
                     cardItemIds : allCardItem.map(item => item._id),
                     medicinesIds : allCardItem.map(item =>item.medicineId),
+                    quantityIds : allCardItem.map(item =>item.quantity),
 
                     status : 'pending'
 

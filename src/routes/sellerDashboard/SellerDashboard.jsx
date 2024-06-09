@@ -2,6 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { FaAd, FaHistory, FaHome } from 'react-icons/fa';
 import { FaCartShopping, FaPersonRifle } from 'react-icons/fa6';
 import useSeller from '../../hooks/useSeller';
+import SellerDashboardRevenue from '../../pages/seller/dashboard/SellerDashboardRevenue';
 
 const SellerDashboard = () => {
     const [isSeller] = useSeller();
@@ -25,6 +26,7 @@ const SellerDashboard = () => {
 
             <div className="flex-1">
                 <Outlet></Outlet>
+                {/* <SellerDashboardRevenue></SellerDashboardRevenue> */}
             </div>
 
         </div>
