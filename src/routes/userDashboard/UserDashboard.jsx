@@ -35,7 +35,7 @@ const UserDashboard = () => {
 
 
                         </Link></li>
-                       
+
                         <li><NavLink to='/invoice'> <FaHistory />Invoice History</NavLink></li>
                         <div className="divider divider-error"></div>
 
@@ -47,36 +47,49 @@ const UserDashboard = () => {
 
                 <div className="flex-1">
 
-                    <p>haddddddddddddddddddddddddddddddddddddddd</p>
-                    {/* <SellerDashboardRevenue></SellerDashboardRevenue> */}
+                    {/*  */}
+                    <div className="ml-10 mt-10">
+                        <p className="text-3xl font-bold text-center mb-10">Payment History</p>
+                        {
+                            userPayments?.length ?
+                                <>
+                                    <div className="overflow-x-auto">
+                                        <table className="table">
+                                            <thead className='bg-slate-100'>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Transaction Id</th>
+                                                    <th>Discount Price</th>
+                                                    <th>Grand Total</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            {
+                                                userPayments.map((cardItem, index) =>
+                                                    <PaymentCard key={cardItem._id} cardItem={cardItem} index={index} ></PaymentCard>
+                                                )
+                                            }
+
+
+
+                                        </table>
+                                    </div>
+                                </> : <>
+                                
+                                <div className="flex items-center justify-center mt-44">
+                                <p className=" text-2xl font-semibold">No Payments Available</p>
+                                </div>
+                                
+                                
+                                </>}
+                    </div>
+
+                    {/*  */}
                 </div>
 
             </div>
-
-
-            {/* <div className="overflow-x-auto">
-                <table className="table">
-                    <thead className='bg-slate-100'>
-                        <tr>
-                            <th>#</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Transaction Id</th>
-                            <th>Discount Price</th>
-                            <th>Grand Total</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    {
-                        userPayments.map((cardItem, index) =>
-                            <PaymentCard key={cardItem._id} cardItem={cardItem} index={index} ></PaymentCard>
-                        )
-                    }
-
-
-
-                </table>
-            </div> */}
         </div>
     );
 };
