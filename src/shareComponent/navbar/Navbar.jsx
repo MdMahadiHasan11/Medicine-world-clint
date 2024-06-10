@@ -87,7 +87,7 @@ const Navbar = () => {
                 </div> */}
                 {/* bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 */}
                 <NavLink to="/" className="  flex  justify-center items-center  font-bold lg:text-3xl md:text-2xl">
-                    <img className="w-24 h-20" src={logo1} alt="" />
+                    <img className="md:w-24 w-16 md:h-20 h-14" src={logo1} alt="" />
                     <p className=''>Medicines-World</p>
 
                 </NavLink>
@@ -146,10 +146,10 @@ const Navbar = () => {
 
                         // 
                         : <span>
-                            <button className="  px-5 mr-4 font-bold text-lg">
+                            <button className="  px-5 md:mr-4 font-bold md:text-lg">
                                 <NavLink to="/login">Join US</NavLink>
                             </button>
-                            <button className=" font-bold mr-4 text-xl">
+                            <button className=" font-bold md:mr-4 text-xl">
                                 <NavLink to="/signUp"><FaRegUser /></NavLink>
                             </button>
 

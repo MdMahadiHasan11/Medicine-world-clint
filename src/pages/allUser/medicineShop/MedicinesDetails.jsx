@@ -1,9 +1,17 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const MedicinesDetails = ({ requestItem, onClose }) => {
 
 
+    useEffect(() => {
+        // Disable scrolling on mount
+        document.body.style.overflow = "hidden";
+        return () => {
+            // Re-enable scrolling when component unmounts
+            document.body.style.overflow = "auto";
+        };
+    }, []);
     // modal set up
     const modalRef = useRef();
     const closeModel = (e) => {
@@ -12,7 +20,7 @@ const MedicinesDetails = ({ requestItem, onClose }) => {
         }
     }
     return (
-        <div ref={modalRef} onClick={closeModel} className='fixed inset-0 max-w-screen-xl mx-auto bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center'>
+        <div ref={modalRef} onClick={closeModel} className='fixed z-50 inset-0 max-w-screen-xl mx-auto bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center'>
             <div>
                 <button onClick={onClose} className='btn py-2 px-4 place-self-end'>X</button>
                 <div className=' rounded-lg flex flex-col gap-5 items-center mx-4 '>
@@ -72,3 +80,4 @@ const MedicinesDetails = ({ requestItem, onClose }) => {
 };
 
 export default MedicinesDetails;
+
