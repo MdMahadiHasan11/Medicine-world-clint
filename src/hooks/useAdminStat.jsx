@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
+import { useEffect, useState } from "react";
 
 
 const useAdminStat = () => {
@@ -27,7 +28,7 @@ const useAdminStat = () => {
         pendingAllMedicineStat = allMedicinesStat[1]?.items;
     }
 
-
+//  const [paidAllMedicineStat,setpaidAllMedicineStat]=useState([]);
 
     return [paidAllMedicineStat, pendingAllMedicineStat , allMedicinesStatRefetch];
 };

@@ -15,26 +15,39 @@ const SalesReport = () => {
     const [endDate, setEndDate] = useState(new Date());
 
     useEffect(() => {
-        setSortMedicine(paidAllMedicineStat)
-    }, [paidAllMedicineStat])
+        const paid = Array.isArray(paidAllMedicineStat) ? paidAllMedicineStat : [];
+        const pending = Array.isArray(pendingAllMedicineStat) ? pendingAllMedicineStat : [];
+        setSortMedicine([...paid, ...pending]);
+    }, [paidAllMedicineStat, pendingAllMedicineStat]);
 
     // table
     const columns = [
         {
-            name: 'Title',
+            name: 'Name',
             selector: row => row.medicinesName,
             sortable: true
         },
         {
-            name: 'Year',
-            selector: row => row.revenue,
+            name: 'Seller Email',
+            selector: row => row.sellerEmail,
+            sortable: true
+        },
+        {
+            name: 'Buyer Email',
+            selector: row => row.email,
             sortable: true
         },
         {
             name: 'Date',
             selector: row => (new Date(row.date)).toLocaleDateString(),
             sortable: true
+        },
+        {
+            name: 'Grand Total',
+            selector: row => row.revenue,
+            sortable: true
         }
+        
     ];
 
 
@@ -74,63 +87,73 @@ const SalesReport = () => {
             draggable: true,
             progress: undefined,
             theme: "colored",
-            })
+        })
     });
+    console.log('paid',paidAllMedicineStat)
 
+    // 
+    // <div className="flex justify-between">
+    //                 <p>Total Paid :{paidAllMedicineStat?.reduce((total, item) => total + item.revenue, 0)}</p>
+    //                 <p>Total Pending :{pendingAllMedicineStat?.reduce((total, item) => total + item.revenue, 0)}</p>
+    //             </div>
+    // {
+    //     paidAllMedicineStat?.map((cardItem, index) =>
+    //         // <div key={cardItem.medicinesName} cardItem={cardItem} index={index} > <p>{cardItem.medicinesName}</p></div>
+    //         <div key={cardItem.medicinesName}>
+    //             <p className="flex gap-2">
+    //                 <p>{index + 1}</p>
+    //                 <p>{cardItem.medicinesName}</p>
+    //                 <p>{cardItem.revenue}</p>
+    //             </p>
+    //         </div>
+    //     )
+    // }
 
     return (
-        <div>
-            <Helmet>
-                <meta charSet="utf-8" />
-                <title>Sales Medicines</title>
-                <link rel="canonical" href="http://mysite.com/example" />
-            </Helmet>
-            <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
+        <div className="flex justify-center items-center text-lg">
+            <div className="mt-10">
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Sales Medicines</title>
+                    <link rel="canonical" href="http://mysite.com/example" />
+                </Helmet>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
 
-            />
-            <DateRangePicker
-                ranges={[selectionRange]}
-                onChange={handleSelect}
-            />
-            <div className="flex justify-between">
-                <p>Total Paid :{paidAllMedicineStat?.reduce((total, item) => total + item.revenue, 0)}</p>
-                <p>Total Pending :{pendingAllMedicineStat?.reduce((total, item) => total + item.revenue, 0)}</p>
-            </div>
-            {
-                paidAllMedicineStat?.map((cardItem, index) =>
-                    // <div key={cardItem.medicinesName} cardItem={cardItem} index={index} > <p>{cardItem.medicinesName}</p></div>
-                    <div key={cardItem.medicinesName}>
-                        <p className="flex gap-2">
-                            <p>{index + 1}</p>
-                            <p>{cardItem.medicinesName}</p>
-                            <p>{cardItem.revenue}</p>
-                        </p>
-                    </div>
-                )
-            }
-            {/*  */}
-            <div ref={componentPDF} className="w-full" >
-                <DataTable
-                    columns={columns}
-                    data={sortMedicine}
-                    // expandableRows
-                    // expandableRowsComponent={ExpandedComponent}
-                    fixedHeader
-                    pagination
                 />
-            </div>
-            <div>
-                <button className="btn btn-success" onClick={generatePDF}>Download</button>
+
+                <DateRangePicker
+                    ranges={[selectionRange]}
+                    onChange={handleSelect}
+                />
+                
+                
+                {/*  */}
+                <div ref={componentPDF} className="w-full" >
+                <p className="text-2xl font-bold mt-10 text-center">Medicines-World</p>
+                    <p className="text-xl font-bold my-10 text-center">Sales Information</p>
+                    
+                    <DataTable
+                        columns={columns}
+                        data={sortMedicine}
+                        // expandableRows
+                        // expandableRowsComponent={ExpandedComponent}
+                        fixedHeader
+                        pagination
+                    />
+                </div>
+                <div className="flex justify-center items-center my-10">
+                    <button className="btn btn-outline" onClick={generatePDF}>Download</button>
+                </div>
             </div>
         </div>
     );

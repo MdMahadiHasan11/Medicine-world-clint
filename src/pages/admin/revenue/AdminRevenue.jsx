@@ -40,13 +40,13 @@ const AdminRevenue = () => {
 
                     <div className="stat">
                         <div className="stat-title">Total Paid</div>
-                        <div className="stat-value">{(totalPaid).toFixed(2)}</div>
+                        <div className="stat-value">{(totalPaid)?.toFixed(2)}</div>
                         <div className="stat-desc">{new Date().toLocaleDateString()}</div>
                     </div>
 
                     <div className="stat">
                         <div className="stat-title">Total Pending</div>
-                        <div className="stat-value">{(totalPending).toFixed(2)}</div>
+                        <div className="stat-value">{(totalPending)?.toFixed(2)}</div>
                         <div className="stat-desc">{new Date().toLocaleDateString()}</div>
                     </div>
 
