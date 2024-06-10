@@ -91,7 +91,7 @@ const CardPage = () => {
 
                         <p className='flex justify-center  items-center text-xl font-bold'>Total :  <FaBangladeshiTakaSign /> {totalPrice}</p>
                         <p className='flex justify-center items-center text-xl font-bold'>Discount : - <FaBangladeshiTakaSign /> {(discountPrice).toFixed(2)}</p>
-                        <p className='flex justify-center items-center text-xl font-bold'>Grand ToTal :  <FaBangladeshiTakaSign />  {totalPrice-(discountPrice).toFixed(2)}</p>
+                        <p className='flex justify-center items-center text-xl font-bold'>Grand ToTal :  <FaBangladeshiTakaSign />  {(totalPrice - discountPrice).toFixed(2)}</p>
 
                     </div>
                     <div className="overflow-x-auto">
