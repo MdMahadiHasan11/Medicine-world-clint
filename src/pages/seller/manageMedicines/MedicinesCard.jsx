@@ -5,7 +5,7 @@ const MedicinesCard = ({ cardItem,userMedicineRefetch, index }) => {
    const axiosSecure =useAxiosSecure();
 
     // medicine delete
-    const handleDelete = (_id) => {
+    const handleDelete = (_id,category) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -16,7 +16,7 @@ const MedicinesCard = ({ cardItem,userMedicineRefetch, index }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-
+                const response = axiosSecure.patch(`/category/number/update/${category}`);
                 axiosSecure.delete(`/sellerMedicine/${_id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
@@ -48,7 +48,7 @@ const MedicinesCard = ({ cardItem,userMedicineRefetch, index }) => {
                 <th>{cardItem.discountPercentage}%</th>
                 <td>
                 {/* onClick={() => handleDelete(cardItem._id)} */}
-                    <button onClick={() => handleDelete(cardItem._id)}  className="btn  btn-outline">
+                    <button onClick={() => handleDelete(cardItem._id,cardItem.category)}  className="btn  btn-outline">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </td>

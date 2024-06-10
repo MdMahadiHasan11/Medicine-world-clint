@@ -1,29 +1,30 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CategoryCard from './CategoryCard';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet';
+import useCategoryMedicines from '../../../../hooks/useCategoryMedicines';
 
 const Category = () => {
-    const axiosSecure = useAxiosSecure();
 
-    const { data: category = [], refetch } = useQuery({
-        queryKey: ['category'],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/allCategory`)
-            return res.data;
-        }
-    })
+    const [category,categoryRefetch]=useCategoryMedicines();
     // const allCategory = allCategories.map(item => item.category);
-    // console.log('category',allCategory);
+    console.log('category',category);
 
 
     return (
         <div>
-            <div className="container mx-auto">
-                <div>
-                    <p data-aos="fade-down"
+
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Home</title>0000
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
+            <div className="container  mx-auto">
+                <div className='flex justify-center mb-10  mx-auto items-center'>
+                    <p data-aos="fade-down "
                         data-aos-easing="ease-out-cubic"
-                        data-aos-duration="1000" className="text-3xl font-bold rounded-2xl text-center bg-yellow-700 py-8 mt-6 mb-2 text-white"><span>SubCategory</span>Category name</p>
+                        data-aos-duration="1000" className="navbar flex justify-center   items-center mx-auto text-center font-extrabold text-3xl bg-opacity-50 bg-black max-w-screen-xl text-white"><span></span>Category Medicines</p>
                 </div>
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 ">
                     {

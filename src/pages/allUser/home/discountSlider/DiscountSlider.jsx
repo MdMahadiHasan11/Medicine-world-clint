@@ -4,14 +4,24 @@ import 'swiper/css';
 import 'swiper/css/bundle';
 import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import useAxiosPublic from '../../../../hooks/useAxiosPublic';
+import { FaBangladeshiTakaSign } from 'react-icons/fa6';
+import useAuth from '../../../../hooks/useAuth';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import useCardItem from '../../../../hooks/useCardItem';
 
 
 
 
 const DiscountSlider = () => {
+    const [refetch, allCardItem] = useCardItem();
+    const navigate =useNavigate();
+
+    // const axiosPublic = useAxiosPublic()
 
     const axiosPublic = useAxiosPublic()
-    const { data: disMedicines = [], refetch } = useQuery({
+    const { data: disMedicines = [] } = useQuery({
         queryKey: ['disMedicines'],
         queryFn: async () => {
             const res = await axiosPublic.get(`/disMedicines`)
@@ -20,14 +30,68 @@ const DiscountSlider = () => {
     })
     console.log(disMedicines);
 
+    const {user}=useAuth();
+    const axiosSecure=useAxiosSecure();
+
+
+    const handleAddCard = (medicine) => {
+        if (user && user.email) {
+            const bookingDetails = {
+                userEmail: user.email,
+                medicineId: medicine._id,
+                medicinesName: medicine.medicinesName,
+                perUnitPrice: medicine.perUnitPrice,
+                discountPercentage: medicine.discountPercentage,
+                category: medicine.category,
+                massUnit: medicine.massUnit,
+                company: medicine.company,
+                grandTotal: medicine.grandTotal,
+                quantity: 1
 
 
 
+
+            }
+            console.log('checkkkkkkkk', bookingDetails);
+            axiosSecure.post(`/addCard`, bookingDetails)
+                .then(res => {
+                    if (res.data.insertedId) {
+                        refetch();
+                        Swal.fire({
+                            position: "top-center",
+                            icon: "success",
+                            title: "Successfully appointment",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                })
+        }
+        else {
+            Swal.fire({
+                title: "You are not login",
+                text: "Please login and booked appointment",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Login"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    navigate('/login', { state: location.pathname });
+                }
+            });
+        }
+    }
     return (
         <div>
             <div className=''>
-                <div>
-                    Discount Card title :{disMedicines.length}
+
+                <div className='flex justify-center  mx-auto items-center'>
+                    <p data-aos="fade-down "
+                        data-aos-easing="ease-out-cubic"
+                        data-aos-duration="1000" className="navbar flex justify-center mb-10 mt-20  items-center mx-auto text-center font-extrabold text-3xl bg-opacity-50 bg-black max-w-screen-xl text-white"><span></span>Discount Medicines</p>
                 </div>
                 <Swiper
                     slidesPerView={2}
@@ -47,18 +111,40 @@ const DiscountSlider = () => {
                     className='mySwiper'
                 >
                     {
-                        disMedicines.map((item) => 
+                        disMedicines.map((item) =>
                             <SwiperSlide key={item._id}>
 
-                               
 
-                                <div className="card bg-base-100 shadow-xl image-full">
-                                    <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-                                    <div className="card-body">
-                                        <h2 className="card-title">Shoes!</h2>
-                                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                                        <div className="card-actions justify-end">
-                                            <button className="btn btn-primary">Buy Now</button>
+
+                                <div className="hero border  bg-base-200">
+                                    <div className="hero-content flex-col lg:flex-row">
+                                        <img src={item.image} className="max-w-[200px] h-[200px] rounded-lg shadow-2xl" />
+                                        <div>
+                                            <div className="flex justify-between">
+                                                <div className="flex gap-2 items-center">
+                                                    <h2 className="font-bold text-3xl">{item.medicinesName}</h2>
+                                                    <p>({item.massUnit})</p>
+                                                </div>
+                                            </div>
+                                            <h1>({item.genericName})</h1>
+                                            <h1 className="text-5xl mb-5  font-bold"><i>{item.discountPercentage}% <span className='text-red-500'>OFF</span></i></h1>
+                                            
+                                            <div className="lg:flex justify-between items-center">
+
+                                                <div className="flex justify-center items-center">
+                                                    <p className="flex justify-center items-center mr-2"><FaBangladeshiTakaSign />
+                                                        <del >
+                                                            {item.perUnitPrice}
+                                                        </del>
+                                                    </p>
+                                                    <p className="text-xl font-bold"><FaBangladeshiTakaSign /></p>
+                                                    <p className="text-xl font-bold">{item.grandTotal}</p>
+                                                </div>
+
+                                                <div>
+                                                    <button onClick={()=>handleAddCard(item)} className='btn ml-4 btn-outline'>Add to Card</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

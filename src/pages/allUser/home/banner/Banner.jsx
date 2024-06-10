@@ -30,8 +30,9 @@ const Banner = () => {
             {
                 activeBanner.map((banner) => <div key={banner._id}>
                     <img src={banner.image} alt="Your Image" className="w-full max-h-[500px]" />
-                    <p className="legend">{banner.bannerHeader
+                    <p className="legend text-white text-xl font-bold">{banner.bannerHeader
                     }</p>
+                    {/* <p className="carousel-caption">Our advanced formula provides quick relief from headaches, muscle aches, and joint pain. Feel better in minutes </p> */}
                 </div>)
             }
         </Carousel>

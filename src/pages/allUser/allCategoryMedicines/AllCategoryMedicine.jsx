@@ -12,6 +12,7 @@ import useCardItem from '../../../hooks/useCardItem';
 import AllCategoryMedicinesCard from './AllCategoryMedicinesCard';
 import { IoIosArrowDown } from 'react-icons/io';
 import axios from 'axios';
+import useCategoryAllMedicines from '../../../hooks/useCategoryAllMedicines';
 
 const AllCategoryMedicine = () => {
     const { category } = useParams();
@@ -19,13 +20,15 @@ const AllCategoryMedicine = () => {
     // 
     const [searchText, setSearchText] = useState('');
 // sort
-    const { data: medicine = [], isLoading, refetch: medicineRefetch } = useQuery({
-        queryKey: ['medicine'],
-        queryFn: async () => {
-            const res = await axiosPublic.get(`/categoryMedicines/${category}`)
-            return res.data;
-        }
-    })
+    // const { data: medicine = [], isLoading, refetch: medicineRefetch } = useQuery({
+    //     queryKey: ['medicine'],
+    //     queryFn: async () => {
+    //         const res = await axiosPublic.get(`/categoryMedicines/${category}`)
+    //         return res.data;
+    //     }
+    // })
+   const [medicine,medicineRefetch]=useCategoryAllMedicines();
+
     const [medicines, setMedicines] = useState(medicine);
 
     const handleDisplaySort = (sort) => {

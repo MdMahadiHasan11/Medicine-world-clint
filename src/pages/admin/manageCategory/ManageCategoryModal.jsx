@@ -45,6 +45,7 @@ const ManageCategoryModal = ({ onClose, categoryRefetch }) => {
                 title: categoryTitle,  
                 description : description,     
                 image: imageUrl,
+                numMedicines : 0 
             }
 
             axiosSecure.post('/admin/allCategory', categoryInfo)

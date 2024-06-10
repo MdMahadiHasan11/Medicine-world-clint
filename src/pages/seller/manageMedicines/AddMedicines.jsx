@@ -24,6 +24,7 @@ const AddMedicines = ({ onClose,userMedicineRefetch }) => {
             return res.data;
         }
     })
+
     const allCategory = allCategories.map(item => item.category);
     console.log('category',allCategory);
 
@@ -71,6 +72,7 @@ const AddMedicines = ({ onClose,userMedicineRefetch }) => {
                 grandTotal :parseFloat((perUnitPrice - ((perUnitPrice*discountPercentage)/100)).toFixed(2))
             }
 
+            const response = axiosSecure.patch(`/category/number/${category}`);
             axiosSecure.post('/allMedicines', medicineInfo)
             .then(res => {
                 if (res.data.insertedId) {
