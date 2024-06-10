@@ -115,8 +115,7 @@ const Card = ({ cardItem, index }) => {
                 <th>{index + 1}</th>
                 <td>{cardItem.medicinesName}</td>
                 <td>{cardItem.company}</td>
-                <th>{cardItem.perUnitPrice}</th>
-                <th>{cardItem.discountPercentage}%</th>
+                
                 <td className='flex m-3 gap-4 justify-center items-center border'>
 
                     <div>
@@ -129,6 +128,8 @@ const Card = ({ cardItem, index }) => {
                     </div>
 
                 </td>
+                <th>{cardItem.perUnitPrice}</th>
+                <th>{cardItem.discountPercentage}%</th>
                 <td>{cardItem.grandTotal}</td>
                 <td>
                     <button onClick={() => handleDelete(cardItem._id)} className="btn  btn-outline">
