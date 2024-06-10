@@ -22,7 +22,7 @@ const AdminRevenue = () => {
 
     const totalPending = pending?.reduce((total, medicine) => total + medicine.grandTotal, 0);
     // const discountPrice = (invoices.reduce((total, medicine) => total + medicine.perUnitPrice, 0)) - totalPrice;
-    console.log(totalPaid, totalPending)
+    // console.log(totalPaid, totalPending)
     return (
         <div>
 

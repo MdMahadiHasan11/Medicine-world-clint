@@ -39,7 +39,7 @@ const UpdateManageCategory = ({ cardItem, categoryRefetch, onClose }) => {
 
         const image_file = { image: data.image[0] }
 
-        console.log(data.image[0]);
+        // console.log(data.image[0]);
 
 
 
@@ -58,11 +58,11 @@ const UpdateManageCategory = ({ cardItem, categoryRefetch, onClose }) => {
                 image: res.data.data.display_url
             }
             setImage(res.data.data.display_url)
-            console.log('coteInfo',categoryInfo)
+            // console.log('coteInfo',categoryInfo)
             
 
             const doctorRes = await axiosSecure.patch(`/admin/update/category/${cardItem._id}`, categoryInfo)
-            console.log(doctorRes.data)
+            // console.log(doctorRes.data)
             if (doctorRes.data.modifiedCount) {
 
                 setImage(res.data.data.display_url);

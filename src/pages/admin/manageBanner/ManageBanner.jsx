@@ -17,7 +17,7 @@ const ManageBanner = () => {
             return res.data;
         }
     })
-    console.log(allBanner);
+    // console.log(allBanner);
     return (
         <div>
             

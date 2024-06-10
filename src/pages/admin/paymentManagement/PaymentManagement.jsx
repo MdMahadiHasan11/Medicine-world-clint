@@ -12,7 +12,7 @@ const PaymentManagement = () => {
             return res.data;
         }
     })
-    console.log(allPayment);
+    // console.log(allPayment);
     return (
         <div>
 

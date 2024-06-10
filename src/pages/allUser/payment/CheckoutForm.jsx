@@ -35,7 +35,7 @@ const CheckoutForm = () => {
 
             axiosSecure.post('/create-payment-intent', { price: totalPrice })
                 .then(res => {
-                    console.log(res.data.clientSecret)
+                    // console.log(res.data.clientSecret)
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -48,7 +48,7 @@ const CheckoutForm = () => {
     const handleSubmit = async (event) => {
 
         event.preventDefault();
-        console.log('total==', totalPrice)
+        // console.log('total==', totalPrice)
 
         if (!stripe || !elements) {
 
@@ -83,11 +83,11 @@ const CheckoutForm = () => {
             console.log('confirm error')
         }
         else {
-            console.log('payment intent', paymentIntent);
+            // console.log('payment intent', paymentIntent);
             if (paymentIntent.status === 'succeeded') {
-                console.log('tranction id', paymentIntent.id)
+                // console.log('tranction id', paymentIntent.id)
                 setTransactionId(paymentIntent.id);
-                console.log('kaj hoye gece')
+                // console.log('kaj hoye gece')
 
                 // save database payment history
 

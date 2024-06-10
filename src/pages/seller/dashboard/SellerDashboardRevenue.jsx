@@ -9,7 +9,7 @@ const SellerDashboardRevenue = () => {
     const totalPaid = (paidMedicines && Array.isArray(paidMedicines)) ? paidMedicines.reduce((total, medicine) => total + medicine.revenue, 0) : 0;
     const totalPending = Array.isArray(pendingMedicines) ? pendingMedicines.reduce((total, medicine) => total + medicine.revenue, 0) : 0;
 
-console.log(paidMedicines, pendingMedicines);
+// console.log(paidMedicines, pendingMedicines);
     // const totalPending = pendingMedicines?.reduce((total, medicine) => total + medicine.grandTotal, 0);
     // const discountPrice = (invoices.reduce((total, medicine) => total + medicine.perUnitPrice, 0)) - totalPrice;
 

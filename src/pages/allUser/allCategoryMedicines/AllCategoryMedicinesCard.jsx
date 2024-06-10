@@ -35,7 +35,7 @@ const AllCategoryMedicinesCard = ({ requestItem, index }) => {
 
 
             }
-            console.log('catcard', bookingDetails)
+            // console.log('catcard', bookingDetails)
             axiosSecure.post(`/addCard`, bookingDetails)
                 .then(res => {
                     if (res.data.insertedId) {

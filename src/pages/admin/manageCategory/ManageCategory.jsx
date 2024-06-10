@@ -17,7 +17,7 @@ const ManageCategory = () => {
             return res.data;
         }
     })
-    console.log(allCategory);
+    // console.log(allCategory);
     const [modal, setModal] = useState(false)
     
     return (

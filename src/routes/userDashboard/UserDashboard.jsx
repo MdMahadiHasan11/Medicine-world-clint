@@ -18,7 +18,7 @@ const UserDashboard = () => {
         }
     })
 
-    console.log(userPayments);
+    // console.log(userPayments);
 
     return (
         <div>

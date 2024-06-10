@@ -10,17 +10,20 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import useCardItem from '../../../../hooks/useCardItem';
+import useAllMedicines from '../../../../hooks/useAllMedicines';
 
 
 
 
-const DiscountSlider = () => {
+const NewMedicines = () => {
     const [refetch, allCardItem] = useCardItem();
     const navigate =useNavigate();
 
     // const axiosPublic = useAxiosPublic()
 
     const axiosPublic = useAxiosPublic()
+
+
     const { data: disMedicines = [] } = useQuery({
         queryKey: ['disMedicines'],
         queryFn: async () => {
@@ -28,7 +31,10 @@ const DiscountSlider = () => {
             return res.data;
         }
     })
-    // console.log(disMedicines);
+    const [doctors ] =useAllMedicines();
+
+    const lastFiveItems = doctors.slice(-5);
+    // console.log('last',lastFiveItems);
 
     const {user}=useAuth();
     const axiosSecure=useAxiosSecure();
@@ -91,7 +97,7 @@ const DiscountSlider = () => {
                 <div className='flex justify-center  mx-auto items-center'>
                     <p data-aos="fade-down "
                         data-aos-easing="ease-out-cubic"
-                        data-aos-duration="1000" className="navbar flex justify-center mb-10 mt-20  items-center mx-auto text-center font-extrabold text-3xl bg-opacity-50 bg-black max-w-screen-xl text-white"><span></span>Discount Medicines</p>
+                        data-aos-duration="1000" className="navbar flex justify-center mb-10  items-center mx-auto text-center font-extrabold text-3xl bg-opacity-50 bg-black max-w-screen-xl text-white"><span></span>New Medicines</p>
                 </div>
                 <Swiper
                     slidesPerView={2}
@@ -111,7 +117,7 @@ const DiscountSlider = () => {
                     className='mySwiper'
                 >
                     {
-                        disMedicines.map((item) =>
+                        lastFiveItems.map((item) =>
                             <SwiperSlide key={item._id}>
 
 
@@ -161,5 +167,4 @@ const DiscountSlider = () => {
         </div>
     );
 };
-export default DiscountSlider;
-
+export default NewMedicines;

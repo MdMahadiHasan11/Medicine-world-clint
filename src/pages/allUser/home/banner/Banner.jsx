@@ -19,7 +19,7 @@ const Banner = () => {
         }
     })
 
-    console.log(activeBanner);
+    // console.log(activeBanner);
     // 
     return (
         <Carousel autoPlay interval={3000} infiniteLoop>

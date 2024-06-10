@@ -26,7 +26,7 @@ const AddMedicines = ({ onClose,userMedicineRefetch }) => {
     })
 
     const allCategory = allCategories.map(item => item.category);
-    console.log('category',allCategory);
+    // console.log('category',allCategory);
 
 
 

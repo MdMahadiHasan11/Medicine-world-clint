@@ -30,14 +30,14 @@ const MedicineShop = () => {
     const firstPostIndex = lastPostIndex - postPerPage;
     const totalPage = Math.ceil(allMedicine.length / postPerPage);
 
-    console.log('totallll pagination', totalPage)
+    // console.log('totallll pagination', totalPage)
 
 
     const currentPosts = (allMedicine.slice(firstPostIndex, lastPostIndex))
 
     const handleChange = (event) => {
         setCurrentPage(event.target.value);
-        console.log('current:', currentPage)
+        // console.log('current:', currentPage)
     };
 
     const pageNumber = [];

@@ -7,7 +7,7 @@ const useAllMedicines = () => {
 
     // useEffect(() => {
         
-    //         fetch('http://localhost:5000/allDoctor')
+    //         fetch('https://medicine-world-server.vercel.app/allDoctor')
     //             .then(res => res.json())
     //             .then(data =>{
     //                 setDoctors(data);

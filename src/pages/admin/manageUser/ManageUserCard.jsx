@@ -9,7 +9,7 @@ const ManageUserCard = ({ cardItem, userRefetch, index }) => {
         const roleInfo = {
             role: role
         }
-        console.log(roleInfo)
+        // console.log(roleInfo)
         Swal.fire({
             title: `Are you sure make ${role}?`,
             text: "You won't be able to revert this!",

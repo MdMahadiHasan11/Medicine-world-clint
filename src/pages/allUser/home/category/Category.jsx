@@ -9,7 +9,7 @@ const Category = () => {
 
     const [category, categoryRefetch] = useCategoryMedicines();
     // const allCategory = allCategories.map(item => item.category);
-    console.log('category', category);
+    // console.log('category', category);
 
 
     return (

@@ -21,9 +21,9 @@ const Card = ({ cardItem, index }) => {
 
 
         }
-        console.log(cardInfo)
+        // console.log(cardInfo)
         const res = await axiosSecure.patch(`/cardItemQuantity/${_id}`, cardInfo)
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.modifiedCount) {
             refetch();
         }

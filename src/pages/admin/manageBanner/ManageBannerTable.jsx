@@ -41,7 +41,7 @@ const ManageBannerTable = ({ cardItem, bannerRefetch, index }) => {
                     }
                 })
         } else {
-            console.log('already add');
+            // console.log('already add');
         }
 
 
@@ -81,7 +81,7 @@ const ManageBannerTable = ({ cardItem, bannerRefetch, index }) => {
                     }
                 })
         } else {
-            console.log('already add');
+            // console.log('already add');
         }
 
 

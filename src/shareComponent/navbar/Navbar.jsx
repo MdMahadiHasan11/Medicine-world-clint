@@ -25,7 +25,7 @@ const Navbar = () => {
     const [isSeller] = useSeller();
 
     const [refetch, allCardItem] = useCardItem();
-    console.log(allCardItem)
+    // console.log(allCardItem)
     const { user, logOut } = useContext(AuthContext);
 
     const handleSignOut = () => {
@@ -72,7 +72,7 @@ const Navbar = () => {
 
     </>
 
-    console.log(theme)
+    // console.log(theme)
     // fixed
     return (
         <div className="navbar fixed z-10 bg-opacity-30 bg-black max-w-screen-xl text-white">

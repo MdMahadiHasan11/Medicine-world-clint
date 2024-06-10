@@ -53,7 +53,7 @@ const SalesReport = () => {
 
     // sort date range
     const handleSelect = (date) => {
-        console.log(paidAllMedicineStat)
+        // console.log(paidAllMedicineStat)
         let filtered = paidAllMedicineStat.filter((product) => {
             let productDate = new Date(product["date"]);
             return (
@@ -61,7 +61,7 @@ const SalesReport = () => {
                 productDate <= date.selection.endDate
             );
         })
-        console.log(filtered)
+        // console.log(filtered)
         setStartDate(date.selection.startDate);
         setEndDate(date.selection.endDate);
         setSortMedicine(filtered);
@@ -89,7 +89,7 @@ const SalesReport = () => {
             theme: "colored",
         })
     });
-    console.log('paid',paidAllMedicineStat)
+    // console.log('paid',paidAllMedicineStat)
 
     // 
     // <div className="flex justify-between">

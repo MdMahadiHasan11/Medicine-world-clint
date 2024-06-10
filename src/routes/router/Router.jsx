@@ -100,7 +100,7 @@ const Router = createBrowserRouter([
             // {
             //     path: "updateDoctor/:id",
             //     element: <AdminRoute><UpdateDoctor></UpdateDoctor></AdminRoute>,
-            //     loader: ({params}) => fetch(`http://localhost:5000/allDoctor/${params.id}`)
+            //     loader: ({params}) => fetch(`https://medicine-world-server.vercel.app/allDoctor/${params.id}`)
             // },
         ]
     },
@@ -140,7 +140,7 @@ const Router = createBrowserRouter([
             // {
             //     path: "updateDoctor/:id",
             //     element: <AdminRoute><UpdateDoctor></UpdateDoctor></AdminRoute>,
-            //     loader: ({params}) => fetch(`http://localhost:5000/allDoctor/${params.id}`)
+            //     loader: ({params}) => fetch(`https://medicine-world-server.vercel.app/allDoctor/${params.id}`)
             // },
         ]
     },

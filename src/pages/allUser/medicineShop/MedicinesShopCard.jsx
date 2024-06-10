@@ -17,7 +17,7 @@ const MedicinesShopCard = ({ requestItem, index }) => {
 
     //
     const handleAddCard = (medicine) => {
-        console.log(medicine._id)
+        // console.log(medicine._id)
         if (user && user.email) {
             const bookingDetails = {
                 userEmail: user.email,
@@ -35,7 +35,7 @@ const MedicinesShopCard = ({ requestItem, index }) => {
 
 
             }
-            console.log('checkkkkkkkk', bookingDetails);
+            // console.log('checkkkkkkkk', bookingDetails);
             axiosSecure.post(`/addCard`, bookingDetails)
                 .then(res => {
                     if (res.data.insertedId) {

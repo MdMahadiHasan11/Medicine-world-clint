@@ -10,7 +10,7 @@ const PaymentCard = ({ cardItem, paymentRefetch, index }) => {
         const statusInfo = {
             status: 'paid'
         }
-        console.log(statusInfo,_id)
+        // console.log(statusInfo,_id)
         Swal.fire({
             title: `Are you sure make ${cardItem.status}?`,
             text: "You won't be able to revert this!",

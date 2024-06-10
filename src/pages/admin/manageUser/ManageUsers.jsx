@@ -19,13 +19,14 @@ const ManageUsers = () => {
     })
     console.log(allUser);
     return (
-        <div>
-            
-<Helmet>
+        <div className="my-20 ml-10 ">
+
+            <Helmet>
                 <meta charSet="utf-8" />
                 <title>Manage User</title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
+            <p className="text-3xl font-bold text-center mb-10">All Users</p>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

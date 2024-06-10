@@ -17,7 +17,7 @@ const ManageMedicines = () => {
             return res.data;
         }
     })
-    console.log(sellerMedicines);
+    // console.log(sellerMedicines);
 
     const [modal, setModal] = useState(false)
 

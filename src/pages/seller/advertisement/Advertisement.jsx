@@ -18,7 +18,7 @@ const Advertisement = () => {
             return res.data;
         }
     })
-    console.log(sellerBanner);
+    // console.log(sellerBanner);
 
     const [modal, setModal] = useState(false)
 

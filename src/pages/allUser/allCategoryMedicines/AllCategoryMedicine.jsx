@@ -61,7 +61,7 @@ const AllCategoryMedicine = () => {
                     setMedicines(res.data);
                     // setLoading(false);
                 })
-            console.log('iffff')
+            // console.log('iffff')
         }
         else {
 
@@ -70,7 +70,7 @@ const AllCategoryMedicine = () => {
                     setMedicines(res.data);
                     // setLoading(false);
                 })
-            console.log('else')
+            // console.log('else')
         }
 
 
