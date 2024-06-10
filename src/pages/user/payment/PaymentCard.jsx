@@ -11,7 +11,7 @@ const PaymentCard = ({ cardItem, index }) => {
                 <td>{new Date(cardItem.date).toLocaleDateString()}</td>
                 <td>{new Date(cardItem.date).toLocaleTimeString()}</td>
                 <td>{cardItem.transactionId}</td>
-                <td >-{cardItem.discountPrice}</td>
+                <td >{(cardItem.discountPrice)?.toFixed(2)}</td>
                 <td >{cardItem.grandTotal}</td>
                 <td>{cardItem.status}</td>
             </tr>

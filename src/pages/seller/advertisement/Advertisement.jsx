@@ -23,7 +23,7 @@ const Advertisement = () => {
     const [modal, setModal] = useState(false)
 
     return (
-        <div>
+        <div className="ml-10 mt-10">
 
             <Helmet>
                 <meta charSet="utf-8" />
@@ -32,7 +32,7 @@ const Advertisement = () => {
             </Helmet>
             <div>
                 <div className="flex justify-center items-center my-6">
-                    <button onClick={() => setModal(true)} className="btn btn-outline btn-wide btn-warning">Add Medicines</button>
+                    <button onClick={() => setModal(true)} className="btn btn-outline btn-wide">Add Medicines</button>
                 </div>
 
                 <div className="overflow-x-auto">

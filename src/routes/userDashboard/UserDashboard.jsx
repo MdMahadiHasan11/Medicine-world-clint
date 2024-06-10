@@ -3,6 +3,8 @@ import { AuthContext } from "../authProvider/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import PaymentCard from "../../pages/user/payment/PaymentCard";
+import { Link, NavLink } from "react-router-dom";
+import { FaHistory, FaHome } from "react-icons/fa";
 
 const UserDashboard = () => {
     const { user } = useContext(AuthContext);
@@ -21,7 +23,38 @@ const UserDashboard = () => {
     return (
         <div>
 
-            <div className="overflow-x-auto">
+            <div className="md:flex">
+                <div className="md:w-64 min-h-screen bg-blue-400">
+                    <ul className="menu">
+                        <li className='mx-auto mb-5'><Link to='/userDashboard'>
+                            <div className="avatar">
+                                <div className="w-24 rounded-full">
+                                    <img src={user.photoURL} />
+                                </div>
+                            </div>
+
+
+                        </Link></li>
+                       
+                        <li><NavLink to='/invoice'> <FaHistory />Invoice History</NavLink></li>
+                        <div className="divider divider-error"></div>
+
+                        <li><NavLink to='/'> <FaHome />Home</NavLink></li>
+                    </ul>
+
+
+                </div>
+
+                <div className="flex-1">
+
+                    <p>haddddddddddddddddddddddddddddddddddddddd</p>
+                    {/* <SellerDashboardRevenue></SellerDashboardRevenue> */}
+                </div>
+
+            </div>
+
+
+            {/* <div className="overflow-x-auto">
                 <table className="table">
                     <thead className='bg-slate-100'>
                         <tr>
@@ -43,7 +76,7 @@ const UserDashboard = () => {
 
 
                 </table>
-            </div>
+            </div> */}
         </div>
     );
 };
