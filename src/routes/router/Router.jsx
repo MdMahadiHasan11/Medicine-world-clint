@@ -27,6 +27,7 @@ import SalesReport from "../../pages/admin/salesReport/SalesReport";
 import ManageBanner from "../../pages/admin/manageBanner/ManageBanner";
 import UserDashboard from "../userDashboard/UserDashboard";
 import SellerDashboardRevenue from "../../pages/seller/dashboard/SellerDashboardRevenue";
+import AdminRevenue from "../../pages/admin/revenue/AdminRevenue";
 // import Shop from "../../pages/allUser/shop/Shop";
 
 
@@ -110,6 +111,10 @@ const Router = createBrowserRouter([
         element: <PrivateRoute><AdminRoute><AdminDashboard> </AdminDashboard></AdminRoute></PrivateRoute>,
         errorElement: <ErrorPageShow></ErrorPageShow>,
         children: [
+            {
+                path: "/adminDashboard",
+                element: <AdminRoute><AdminRevenue></AdminRevenue></AdminRoute>,
+            },
             {
                 path: "manageUsers",
                 element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,

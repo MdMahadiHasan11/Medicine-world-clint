@@ -8,13 +8,14 @@ import useAuth from "../../../hooks/useAuth";
 import { Helmet } from "react-helmet";
 import useInvoice from "../../../hooks/useInvoice";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Invoice = () => {
     // const printInvoice = () => {
     //     window.print();
     // };
 
-
+ const navigate = useNavigate();
 
 
     // 
@@ -23,9 +24,9 @@ const Invoice = () => {
     const generatePDF = useReactToPrint({
         content: () => componentPDF.current,
         documentTitle: 'Sales Medicines',
-        onAfterPrint: () => toast.success('Download Successfully..!!', {
+        onAfterPrint: () => { toast.success('Download Successfully..!!', {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -33,6 +34,7 @@ const Invoice = () => {
             progress: undefined,
             theme: "colored",
         })
+        navigate('/')}
     });
     const { user } = useAuth();
     // console.log('hasabbbbbbbbbb',user)
@@ -67,7 +69,7 @@ const Invoice = () => {
                     <div className="max-w-4xl mx-auto  p-6  ">
                         <div className="text-center mb-8">
                             <img src={img} alt="Website Logo" className="mx-auto w-32" />
-                            <h1 className="text-2xl font-bold ">Invoice</h1>
+                            <h1 className="text-2xl font-bold ">Medicines-World</h1>
                             <p>Date: <span>{new Date().toLocaleDateString()}</span></p>
                         </div>
                         <div className="mb-8">

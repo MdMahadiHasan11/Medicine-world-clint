@@ -59,15 +59,15 @@ const ManageUserCard = ({ cardItem, userRefetch, index }) => {
                     {
                         cardItem.role === 'user' ?
                             <>
-                                <button onClick={() => handleRole(cardItem._id, 'admin')} > Make Admin</button>
+                                <button className="btn btn-outline" onClick={() => handleRole(cardItem._id, 'admin')} > Make Admin</button>
 
-                                <button onClick={() => handleRole(cardItem._id, 'seller')} > Make Seller</button>
+                                <button className="btn ml-4 btn-outline" onClick={() => handleRole(cardItem._id, 'seller')} > Make Seller</button>
                             </>
                             :
 
                             cardItem.role === 'seller'
                                 ?
-                                <button onClick={() => handleRole(cardItem._id, 'user')} > Make User</button>
+                                <button className="btn btn-outline" onClick={() => handleRole(cardItem._id, 'user')} > Make User</button>
                                 :
                                 ''
 
