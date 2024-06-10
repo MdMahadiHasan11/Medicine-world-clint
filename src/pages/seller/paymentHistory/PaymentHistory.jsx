@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import PaymentHistoryCard from "./PaymentHistoryCard";
 import useSellerStat from "../../../hooks/useSellerStat";
+import { Helmet } from "react-helmet";
 
 const PaymentHistory = () => {
     // const { user } = useAuth();
@@ -15,9 +16,9 @@ const PaymentHistory = () => {
     //     }
     // })
 
-    const [paidMedicines,pendingMedicines]=useSellerStat();
+    const [paidMedicines, pendingMedicines] = useSellerStat();
 
-
+// console.log(paidMedicines, pendingMedicines)
     // let paidMedicines;
     // let pendingMedicines;
     // if (sellerMedicinesInfo[0]?.status === 'pending') {
@@ -32,12 +33,19 @@ const PaymentHistory = () => {
     // console.log('hiiii', pendingMedicines)
 
     return (
-        <div>
+        <div className="ml-10 mt-10">
+
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Seller Payment History</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div>
-                <div className="flex justify-between">
-                    <p>Total Paid :{paidMedicines?.items.reduce((total,item)=>total+item.revenue,0)}</p>
-                    <p>Total Pending :{pendingMedicines?.items.reduce((total,item)=>total+item.revenue,0)}</p>
-                </div>
+                <p className="text-3xl mb-10 font-bold text-center">Payment History</p>
+                {/* <div className="flex justify-between"> */}
+                {/* <p>Total Paid :{paidMedicines?.items.reduce((total,item)=>total+item.revenue,0)}</p> */}
+                {/* <p>Total Pending :{pendingMedicines?.items.reduce((total,item)=>total+item.revenue,0)}</p> */}
+                {/* </div> */}
                 <div className="overflow-x-auto">
 
                     <table className="table">
@@ -52,13 +60,18 @@ const PaymentHistory = () => {
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        {
+                        {/* {
                             paidMedicines?.items.map((cardItem, index) =>
                                 <PaymentHistoryCard key={cardItem.medicinesName} cardItem={cardItem} index={index} ></PaymentHistoryCard>
                             )
-                        }
+                        } */}
+
+                        {paidMedicines?.map((cardItem, index) =>
+                            <PaymentHistoryCard key={cardItem.medicinesName} cardItem={cardItem} index={index} />
+                        )}
+
                         {
-                            pendingMedicines?.items.map((cardItem, index) =>
+                            pendingMedicines?.map((cardItem, index) =>
                                 <PaymentHistoryCard key={cardItem.medicinesName} cardItem={cardItem} index={index} ></PaymentHistoryCard>
                             )
                         }

@@ -5,6 +5,7 @@ import AddAdvertisement from "./AddAdvertisement";
 import { AuthContext } from "../../../routes/authProvider/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import CardAdvertisement from "./CardAdvertisement";
+import { Helmet } from "react-helmet";
 
 const Advertisement = () => {
     const { user } = useContext(AuthContext);
@@ -23,6 +24,12 @@ const Advertisement = () => {
 
     return (
         <div>
+
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Manage Advertisement</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div>
                 <div className="flex justify-center items-center my-6">
                     <button onClick={() => setModal(true)} className="btn btn-outline btn-wide btn-warning">Add Medicines</button>
@@ -53,7 +60,7 @@ const Advertisement = () => {
 
             </div>
             <div>
-            {/* userMedicineRefetch={userMedicineRefetch} */}
+                {/* userMedicineRefetch={userMedicineRefetch} */}
                 {modal && <AddAdvertisement sellerBannerRefetch={sellerBannerRefetch} onClose={() => setModal(false)}></AddAdvertisement>}
             </div>
 

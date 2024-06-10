@@ -15,16 +15,18 @@ const AdminRevenue = () => {
     })
     const paid = allPayment[0];
     const pending = allPayment[1];
-    
 
-    const totalPaid = paid?.reduce((total, medicine) => total + medicine.grandTotal, 0);
-    const totalPending= pending?.reduce((total, medicine) => total + medicine.grandTotal, 0);
+
+    // const totalPaid = paid?.reduce((total, medicine) => total + medicine.grandTotal, 0);
+    const totalPaid = (paid && Array.isArray(paid)) ? paid.reduce((total, medicine) => total + medicine.grandTotal, 0) : 0;
+
+    const totalPending = pending?.reduce((total, medicine) => total + medicine.grandTotal, 0);
     // const discountPrice = (invoices.reduce((total, medicine) => total + medicine.perUnitPrice, 0)) - totalPrice;
     console.log(totalPaid, totalPending)
     return (
         <div>
-            
-<Helmet>
+
+            <Helmet>
                 <meta charSet="utf-8" />
                 <title>Admin Revenue</title>
                 <link rel="canonical" href="http://mysite.com/example" />
@@ -34,7 +36,7 @@ const AdminRevenue = () => {
 
                     <div className="stat">
                         <div className="stat-title">Total Revenue</div>
-                        <div className="stat-value">{(totalPaid+totalPending).toFixed(2)}</div>
+                        <div className="stat-value">{(totalPaid + totalPending).toFixed(2)}</div>
                         <div className="stat-desc">{new Date().toLocaleDateString()}</div>
                     </div>
 

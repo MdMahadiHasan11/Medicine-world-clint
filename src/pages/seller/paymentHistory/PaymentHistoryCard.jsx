@@ -10,7 +10,7 @@ const PaymentHistoryCard = ({cardItem,index}) => {
                 <td>{cardItem.quantity}</td>
                 <td>{cardItem.totalPrice}</td>
                 <td >
-                    {(cardItem.totalPrice-cardItem.revenue).toFixed(2)}
+                    {(cardItem.totalPrice-cardItem.revenue)?.toFixed(2)}
                 </td>
                 <th>{cardItem.revenue}</th>
                 <th>{cardItem.status}</th>

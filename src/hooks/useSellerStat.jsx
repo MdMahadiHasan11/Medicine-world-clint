@@ -18,13 +18,13 @@ const useSellerStat = () => {
     let paidMedicines;
     let pendingMedicines;
     if (sellerMedicinesInfo[0]?.status === 'pending') {
-        paidMedicines = sellerMedicinesInfo[1];
-        pendingMedicines = sellerMedicinesInfo[0];
+        paidMedicines = sellerMedicinesInfo[1]?.items;
+        pendingMedicines = sellerMedicinesInfo[0]?.items;
         // const totalPrice=paidMedicines.map((total,medicine)=>total+medicine.totalPrice,0);
         // console.log(totalPrice);
     } else {
-        paidMedicines = sellerMedicinesInfo[0];
-        pendingMedicines = sellerMedicinesInfo[1];
+        paidMedicines = sellerMedicinesInfo[0]?.items;
+        pendingMedicines = sellerMedicinesInfo[1]?.items;
     }
 
 

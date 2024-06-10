@@ -48,7 +48,7 @@ const PaymentCard = ({ cardItem, paymentRefetch, index }) => {
                 <td>{cardItem.email}</td>
                 <th>{new Date(cardItem.date).toLocaleDateString()}</th>
                 <th>{cardItem.discountPrice + cardItem.grandTotal }</th>
-                <th>{(cardItem.discountPrice).toFixed(2)}</th>
+                <th>{(cardItem.discountPrice)?.toFixed(2)}</th>
                 <th>{cardItem.grandTotal}</th>
                 <th>{cardItem.status}</th>
                 <th>
