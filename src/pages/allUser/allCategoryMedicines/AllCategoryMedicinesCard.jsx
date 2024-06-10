@@ -7,6 +7,8 @@ import useCardItem from "../../../hooks/useCardItem";
 import AllCategoryDetails from "./AllCategoryDetails";
 import MedicinesDetails from "../medicineShop/MedicinesDetails";
 import { FaEye } from "react-icons/fa";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 const AllCategoryMedicinesCard = ({ requestItem, index }) => {
     const { user } = useContext(AuthContext);
@@ -69,69 +71,119 @@ const AllCategoryMedicinesCard = ({ requestItem, index }) => {
 
     const [modal, setModal] = useState(false)
     return (
-        <tbody className='bg-white divide-y divide-gray-200 '>
-            <tr>
-                <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
+        // <tbody className='bg-white divide-y divide-gray-200 '>
+        //     <tr>
+        //         <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
+        //             {index + 1}
+        //         </td>
+        //         <td className='px-4 py-4 text-sm text-gray-500 flex gap-3 items-center   whitespace-nowrap'>
+
+        //             {requestItem.medicinesName}
+        //         </td>
+
+        //         <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
+        //             {requestItem.genericName}
+        //         </td>
+
+
+        //         <td className='px-4 py-4 text-sm whitespace-nowrap'>
+        //             <div className='flex items-center gap-x-2'>
+        //                 <p
+        //                     className='px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
+        //                        text-xs'
+        //                 >
+        //                     {requestItem.category}
+        //                 </p>
+        //             </div>
+        //         </td>
+        //         <td className='px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap'>
+        //             <div className='inline-flex items-center px-3 py-1 rounded-full gap-x-2  '>
+        //                 {
+        //                     requestItem.massUnit
+        //                 }
+
+        //             </div>
+        //         </td>
+        //         <td className='px-4 py-4 text-sm whitespace-nowrap'>
+        //             <div className='flex items-center gap-x-2'>
+        //                 <p
+        //                     className='px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
+        //                        text-xs'
+        //                 >
+        //                     {requestItem.perUnitPrice}
+        //                 </p>
+        //             </div>
+        //         </td>
+        //         <td className='px-4 py-4 text-sm whitespace-nowrap'>
+        //             <div className='flex items-center gap-x-2'>
+        //                 <p
+        //                     className='px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
+        //                        text-xs'
+        //                 >
+        //                     {requestItem.discountPercentage}%
+        //                 </p>
+        //             </div>
+        //         </td>
+        //         <td className='px-4 py-4 text-sm whitespace-nowrap'>
+
+
+        //             <button onClick={() => handleAddCard(requestItem)} className="btn btn-outline btn-success  font-bold text-lg">Select</button>
+
+        //             <button onClick={() => setModal(true)} className="btn btn-outline btn-success ml-5  font-bold text-lg"><FaEye></FaEye></button>
+
+        //         </td>
+        //     </tr>
+        //     {modal && <MedicinesDetails requestItem={requestItem} onClose={() => setModal(false)}></MedicinesDetails>}
+        // </tbody>
+        <tbody className=''>
+            <tr className="hover">
+                <td >
                     {index + 1}
                 </td>
-                <td className='px-4 py-4 text-sm text-gray-500 flex gap-3 items-center   whitespace-nowrap'>
+                <td>
 
-                    {requestItem.medicinesName}
+                    {requestItem.medicinesName} <span className="text-xs">({
+                        requestItem.massUnit
+                    })</span>
                 </td>
 
-                <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
+                <td >
+
                     {requestItem.genericName}
                 </td>
 
 
-                <td className='px-4 py-4 text-sm whitespace-nowrap'>
-                    <div className='flex items-center gap-x-2'>
-                        <p
-                            className='px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
-                               text-xs'
-                        >
-                            {requestItem.category}
-                        </p>
-                    </div>
-                </td>
-                <td className='px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap'>
-                    <div className='inline-flex items-center px-3 py-1 rounded-full gap-x-2  '>
-                        {
-                            requestItem.massUnit
-                        }
+                <td >
 
-                    </div>
-                </td>
-                <td className='px-4 py-4 text-sm whitespace-nowrap'>
-                    <div className='flex items-center gap-x-2'>
-                        <p
-                            className='px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
-                               text-xs'
-                        >
-                            {requestItem.perUnitPrice}
-                        </p>
-                    </div>
-                </td>
-                <td className='px-4 py-4 text-sm whitespace-nowrap'>
-                    <div className='flex items-center gap-x-2'>
-                        <p
-                            className='px-3 py-1 rounded-full text-blue-500 bg-blue-100/60
-                               text-xs'
-                        >
-                            {requestItem.discountPercentage}%
-                        </p>
-                    </div>
-                </td>
-                <td className='px-4 py-4 text-sm whitespace-nowrap'>
-
-
-                    <button onClick={() => handleAddCard(requestItem)} className="btn btn-outline btn-success  font-bold text-lg">Select</button>
-
-                    <button onClick={() => setModal(true)} className="btn btn-outline btn-success ml-5  font-bold text-lg"><FaEye></FaEye></button>
+                    <p>
+                        {requestItem.category}
+                    </p>
 
                 </td>
+                <td  >
+                <p className="flex ml-0 items-center justify-center"><FaBangladeshiTakaSign />{requestItem.perUnitPrice}</p>
+                </td>
+                <td >
+
+                    <p>
+                        {requestItem.discountPercentage}%
+                    </p>
+
+                </td>
+                <td  >
+                    <p className="flex items-center justify-center"><FaBangladeshiTakaSign />{requestItem.grandTotal}</p>
+                </td>
+                <td>
+
+
+                    <button onClick={() => handleAddCard(requestItem)} className="btn btn-outline   font-bold text-lg"><MdOutlineAddShoppingCart />
+                    </button>
+
+                    <button onClick={() => setModal(true)} className="btn btn-outline  ml-5  font-bold text-lg"><FaEye></FaEye></button>
+                </td>
+                {modal && <MedicinesDetails requestItem={requestItem} onClose={() => setModal(false)}></MedicinesDetails>}
             </tr>
-            {modal && <MedicinesDetails requestItem={requestItem} onClose={() => setModal(false)}></MedicinesDetails>}
+
         </tbody>
     );
 };

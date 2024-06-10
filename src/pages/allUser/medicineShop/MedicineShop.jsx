@@ -189,7 +189,7 @@ const MedicineShop = () => {
                     <form>
                         <div className="flex-1 px-2 lg:flex-none">
                             <label className="input input-bordered flex items-center gap-2">
-                                <input type="text" className="grow"
+                                <input type="text" className="grow text-blue-600"
                                     name="searchText"
                                     value={searchText} onChange={(e) => setSearchText(e.target.value)}
                                     placeholder="Search" />
@@ -216,7 +216,7 @@ const MedicineShop = () => {
                 <div className='mt-10'>
                     <p data-aos="fade-down"
                         data-aos-easing="ease-out-cubic"
-                        data-aos-duration="1000" className="text-3xl font-bold rounded-2xl text-center  py-8 mt-6 mb-2 ">All Medicines Table
+                        data-aos-duration="1000" className="text-3xl font-bold rounded-2xl text-center uppercase  py-8 mt-6 mb-2 ">All Medicines Table
                     </p>
                 </div>
                 <div className="overflow-x-auto">

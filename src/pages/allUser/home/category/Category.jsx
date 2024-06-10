@@ -7,9 +7,9 @@ import useCategoryMedicines from '../../../../hooks/useCategoryMedicines';
 
 const Category = () => {
 
-    const [category,categoryRefetch]=useCategoryMedicines();
+    const [category, categoryRefetch] = useCategoryMedicines();
     // const allCategory = allCategories.map(item => item.category);
-    console.log('category',category);
+    console.log('category', category);
 
 
     return (
@@ -17,7 +17,7 @@ const Category = () => {
 
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Home</title>0000
+                <title>Category Medicines</title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
             <div className="container  mx-auto">
@@ -36,6 +36,7 @@ const Category = () => {
 
             </div>
         </div>
+
     );
 };
 
