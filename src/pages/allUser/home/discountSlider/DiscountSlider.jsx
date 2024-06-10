@@ -118,16 +118,16 @@ const DiscountSlider = () => {
 
                                 <div className="hero border  bg-base-200">
                                     <div className="hero-content flex-col lg:flex-row">
-                                        <img src={item.image} className="max-w-[200px] h-[200px] rounded-lg shadow-2xl" />
+                                        <img src={item.image} className="md:max-w-[200px] max-w-[150px]  h-[200px] rounded-lg shadow-2xl" />
                                         <div>
                                             <div className="flex justify-between">
                                                 <div className="flex gap-2 items-center">
-                                                    <h2 className="font-bold text-3xl">{item.medicinesName}</h2>
+                                                    <h2 className="font-bold md:text-3xl text-xl">{item.medicinesName}</h2>
                                                     <p>({item.massUnit})</p>
                                                 </div>
                                             </div>
                                             <h1>({item.genericName})</h1>
-                                            <h1 className="text-5xl mb-5  font-bold"><i>{item.discountPercentage}% <span className='text-red-500'>OFF</span></i></h1>
+                                            <h1 className="lg:text-5xl md:text-3xl text-xl mb-5  font-bold"><i>{item.discountPercentage}% <span className='text-red-500'>OFF</span></i></h1>
                                             
                                             <div className="lg:flex justify-between items-center">
 
