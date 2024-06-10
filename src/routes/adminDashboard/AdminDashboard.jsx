@@ -12,8 +12,8 @@ const AdminDashboard = () => {
     const { user } = useAuth();
 
     return (
-        <div className="flex">
-            <div className="w-64 min-h-screen bg-blue-400">
+        <div className="md:flex">
+            <div className="md:w-64 min-h-screen bg-blue-400">
                 <ul className="menu">
                     <li  className='mx-auto mb-5'><Link  to='/adminDashboard'>
                         <div className="avatar">
