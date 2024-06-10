@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const AdminRevenue = () => {
     const axiosSecure = useAxiosSecure();
@@ -22,6 +23,12 @@ const AdminRevenue = () => {
     console.log(totalPaid, totalPending)
     return (
         <div>
+            
+<Helmet>
+                <meta charSet="utf-8" />
+                <title>Admin Revenue</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div className="flex mt-52  justify-center">
                 <div className="stats stats-vertical lg:stats-horizontal shadow">
 

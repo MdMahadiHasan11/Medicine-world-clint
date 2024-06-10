@@ -4,6 +4,7 @@ import { AuthContext } from "../../../routes/authProvider/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import ManageCategoryCard from "./ManageCategoryCard";
 import ManageCategoryModal from "./ManageCategoryModal";
+import { Helmet } from "react-helmet";
 
 const ManageCategory = () => {
     const { user } = useContext(AuthContext);
@@ -21,6 +22,12 @@ const ManageCategory = () => {
     
     return (
         <div>
+            
+<Helmet>
+                <meta charSet="utf-8" />
+                <title>Manage Category Admin</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div className="flex justify-center items-center my-6">
                 <button onClick={() => setModal(true)} className="btn btn-outline btn-wide btn-warning">Add Category</button>
             </div>

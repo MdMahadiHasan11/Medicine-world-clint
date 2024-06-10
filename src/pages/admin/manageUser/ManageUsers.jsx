@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../routes/authProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import ManageUserCard from "./ManageUserCard";
+import { Helmet } from "react-helmet";
 
 
 const ManageUsers = () => {
@@ -19,6 +20,12 @@ const ManageUsers = () => {
     console.log(allUser);
     return (
         <div>
+            
+<Helmet>
+                <meta charSet="utf-8" />
+                <title>Manage User</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

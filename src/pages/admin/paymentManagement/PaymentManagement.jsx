@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import PaymentCard from "./PaymentCard";
+import { Helmet } from "react-helmet";
 
 const PaymentManagement = () => {
     const axiosSecure = useAxiosSecure();
@@ -14,6 +15,12 @@ const PaymentManagement = () => {
     console.log(allPayment);
     return (
         <div>
+
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Payment Management</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
