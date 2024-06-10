@@ -43,7 +43,7 @@ const MedicinesShopCard = ({ requestItem, index }) => {
                         Swal.fire({
                             position: "top-center",
                             icon: "success",
-                            title: "Successfully appointment",
+                            title: "Successfully Add to Card",
                             showConfirmButton: false,
                             timer: 1500
                         });
