@@ -1,33 +1,33 @@
-// import React from 'react';
-
 import { Link } from "react-router-dom";
 import useCategoryAllMedicines from "../../../../hooks/useCategoryAllMedicines";
-import useAxiosPublic from "../../../../hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
 
 const CategoryCard = ({ item }) => {
-    const { category, title, image, numMedicines, description,_id} = item;
-    const [medicine,medicineRefetch]=useCategoryAllMedicines();
+    const { category, title, image, numMedicines } = item;
+    const [medicine, medicineRefetch] = useCategoryAllMedicines();
 
     return (
-        <div><Link to={`allCategoryMedicines/${category}`}>
-            <div className="card card-compact bg-gray-100 border-cyan-700  shadow-xl">
-                <figure><img src={image} className="max-h-[200px] w-full rounded-lg shadow-2xl" /></figure>
-                <div className="card-body text-center">
-                    <h1 className="text-2xl  font-bold">{title}</h1>
-                    <p className='text-lg font-bold'>Category: {category}</p>
-
-                    <div className="card-actions text-lg font-semibold justify">
-                        <p>No of medicines:{item?.numMedicines}</p>
+        <div className="transform transition-transform duration-300  hover:scale-105">
+            <Link to={`allCategoryMedicines/${category}`}>
+            <div className="hero cardStyle border rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-row gap-4 p-6 max-w-lg"> 
+                    {/* Image on the left */}
+                    <div className="flex-shrink-0">
+                        <img
+                            src={image}
+                            alt={title}
+                            className="max-h-32 w-32 rounded-lg object-cover transition-opacity duration-300 hover:opacity-80"
+                        />
                     </div>
-                    <div className="card-actions justify-end">
 
-                        {/* <button className="btn btn-primary">Braces</button> */}
-
+                    {/* Text on the right */}
+                    <div className="ml-4 flex-1">
+                        {/* <h1 className="text-xl font-semibold mb-1 ">{title}</h1> */}
+                        <h1 className="text-lg font-medium"><span className="">{category}</span></h1>
+                        <div className="mt-2">
+                            <p className=" font-medium">Total medicines: <span className="font-bold">{numMedicines}</span></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Link>
+            </Link>
         </div>
     );
 };

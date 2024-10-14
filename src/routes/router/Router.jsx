@@ -28,6 +28,7 @@ import ManageBanner from "../../pages/admin/manageBanner/ManageBanner";
 import UserDashboard from "../userDashboard/UserDashboard";
 import SellerDashboardRevenue from "../../pages/seller/dashboard/SellerDashboardRevenue";
 import AdminRevenue from "../../pages/admin/revenue/AdminRevenue";
+import DiscountSliderViewDetails from "../../pages/allUser/home/discountSlider/DiscountSliderViewDetails";
 // import Shop from "../../pages/allUser/shop/Shop";
 
 
@@ -70,6 +71,10 @@ const Router = createBrowserRouter([
             {
                 path: "/invoice",
                 element: <PrivateRoute><Invoice></Invoice></PrivateRoute>,
+            },
+            {
+                path: "/discountSliderViewDetails",
+                element:<DiscountSliderViewDetails></DiscountSliderViewDetails>,
             },
         ]
     },

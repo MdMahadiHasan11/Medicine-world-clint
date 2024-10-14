@@ -1,42 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import CategoryCard from './CategoryCard';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
-import { Helmet } from 'react-helmet';
 import useCategoryMedicines from '../../../../hooks/useCategoryMedicines';
+import { Helmet } from 'react-helmet';
+import { ThemeContext } from '../../../../../ThemeContext'; // Ensure the path is correct
 
 const Category = () => {
-
-    const [category, categoryRefetch] = useCategoryMedicines();
-    // const allCategory = allCategories.map(item => item.category);
-    // console.log('category', category);
-
+    const [category] = useCategoryMedicines();
+    const { theme } = useContext(ThemeContext); // Access the current theme
 
     return (
         <div>
-
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Category Medicines</title>
+                <title>Categories</title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
-            <div className="container  mx-auto">
-                <div className='flex justify-center mb-10  mx-auto items-center'>
-                    <p data-aos="fade-down "
+            <div className="">
+                <div className='flex justify-center text-primary mx-auto items-center'>
+                    <p 
+                        data-aos="fade-down"
                         data-aos-easing="ease-out-cubic"
-                        data-aos-duration="1000" className="navbar flex justify-center   items-center mx-auto text-center font-extrabold text-3xl bg-opacity-50 bg-black max-w-screen-xl text-white"><span></span>Category Medicines</p>
+                        data-aos-duration="1000"
+                        className={`navbar py-10 flex justify-center items-center mx-auto text-center font-extrabold text-3xl max-w-screen-xl`}>
+                        Categories
+                    </p>
                 </div>
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 ">
-                    {
-                        category.map(item => <CategoryCard key={item._id}
-                            item={item}></CategoryCard>)
-                    }
-
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+                    {category.map(item => (
+                        <CategoryCard key={item._id} item={item} />
+                    ))}
                 </div>
-
             </div>
         </div>
-
     );
 };
 

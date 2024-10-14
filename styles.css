@@ -1,0 +1,47 @@
+:root {
+    --bg-color: #f5f7fa;         /* Light Theme Background */
+    --text-color: #333;          /* Light Theme Text */
+    --primary-color: #007bff;    /* Light Theme Primary */
+    --accent-color: #28a745;      /* Light Theme Accent */
+    --card-bg-color: #ffffff;    /* Card Background */
+    --navbar-bg-color: #d10e0e;  /* Navbar Background */
+  }
+  
+  [data-theme='dark'] {
+    --bg-color: #1a1a1a;         /* Dark Theme Background */
+    --text-color: #e5e7eb;       /* Dark Theme Text */
+    --primary-color: #3b82f6;    /* Dark Theme Primary */
+    --accent-color: #34d399;      /* Dark Theme Accent */
+    --card-bg-color: #2c2c2c;    /* Dark Theme Card Background */
+    --navbar-bg-color: #3c3c3c;  /* Dark Theme Navbar Background */
+  }
+  
+  /* General body styling */
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    background-color: var(--navbar-bg-color);
+    color: var(--text-color);
+  }
+  
+  /* Card styling */
+  .card {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+  }
+  
+  /* Heading styling */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+  }
+  
+  /* Example for accent color */
+  .btn-accent {
+    background-color: var(--accent-color);
+    color: white;
+  }
+  

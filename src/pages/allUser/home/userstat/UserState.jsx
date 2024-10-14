@@ -29,7 +29,7 @@ const UserState = () => {
             <div className='flex justify-center  mx-auto items-center'>
                 <p data-aos="fade-down "
                     data-aos-easing="ease-out-cubic"
-                    data-aos-duration="1000" className="navbar flex justify-center mb-10  items-center mx-auto text-center font-extrabold text-3xl bg-opacity-50 bg-black max-w-screen-xl text-white"><span></span>Stat</p>
+                    data-aos-duration="1000" className="navbar flex justify-center mb-10  items-center mx-auto text-center font-extrabold text-3xl  max-w-screen-xl "><h3>Stat</h3></p>
             </div>
 
             <div className='flex justify-center items-center'>

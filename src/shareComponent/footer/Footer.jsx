@@ -1,10 +1,10 @@
 import img from '../../../public/image/logo1.png'
 const Footer = () => {
     return (
-        <footer className="footer  p-10 bg-neutral text-neutral-content">
+        <footer className="footer p-10 bg-neutral text-neutral-content">
             <aside>
                 <img src={img} className='h-[100px] w-[100px]' alt="" />
-                <p className='text-2xl font-bold'>Medicines World.</p>
+                <p className='text-2xl  font-bold'>Medicines World.</p>
                 <p>Providing reliable tech since 10 May 2024</p>
             </aside>
             <nav>

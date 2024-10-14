@@ -35,28 +35,35 @@ const MedicineShop = () => {
 
     const currentPosts = (allMedicine.slice(firstPostIndex, lastPostIndex))
 
-    const handleChange = (event) => {
-        setCurrentPage(event.target.value);
-        // console.log('current:', currentPage)
-    };
+   // Change page with buttons
+   const handlePageChange = (pageNum) => {
+    setCurrentPage(pageNum);
+};
 
-    const pageNumber = [];
-    for (let i = 1; i <= totalPage; i++) {
-        pageNumber.push(
-            <input
-                key={i}
-                className="join-item btn btn-square"
-                type="radio"
-                name="options"
-                aria-label={i.toString()}
-                value={i.toString()}
-                checked={currentPage === i.toString() || (i === 1 && currentPage === 1)}
-                onChange={handleChange}
-            />
-        );
-    }
+// Handle previous page
+const handlePrevious = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+};
 
-    // 
+// Handle next page
+const handleNext = () => {
+    if (currentPage < totalPage) setCurrentPage(currentPage + 1);
+};
+
+// Generate page numbers
+const pageNumber = [];
+for (let i = 1; i <= totalPage; i++) {
+    pageNumber.push(
+        <button
+            key={i}
+            className={`join-item btn btn-square transition-colors duration-300 ${currentPage === i ? "bg-blue-500 text-white" : "bg-gray-100 hover:bg-gray-200"}`}
+            onClick={() => handlePageChange(i)}
+        >
+            {i}
+        </button>
+    );
+}
+
 
     // 
     const [searchText, setSearchText] = useState('');
@@ -204,7 +211,7 @@ const MedicineShop = () => {
                         <summary className="m-1 btn ">Sort<IoIosArrowDown /></summary>
                         <ul className="p-2 shadow menu text-black dropdown-content z-10 flex items-center bg-slate-300  font-bold rounded-box w-52">
 
-                            <li  onClick={() => handleDisplaySort('Ascending')}><a>Ascending</a></li>
+                            <li onClick={() => handleDisplaySort('Ascending')}><a>Ascending</a></li>
                             <li className="border-t-2" onClick={() => handleDisplaySort('Descending')}><a>Descending</a></li>
                         </ul>
                     </details>
@@ -236,7 +243,7 @@ const MedicineShop = () => {
                         </thead>
                         {
                             currentPosts.map((requestItem, index) =>
-                                <MedicinesShopCard key={requestItem._id} requestItem={requestItem} index={index} ></MedicinesShopCard>
+                                <MedicinesShopCard key={requestItem._id} requestItem={requestItem} index={index+firstPostIndex} ></MedicinesShopCard>
 
                             )
                         }
@@ -248,8 +255,27 @@ const MedicineShop = () => {
 
             </div>
             {/* pagination */}
-            <div className="flex mb-10 justify-center items-center">
+            <div className="pagination-controls mt-8 flex justify-center items-center gap-2">
+                {/* Previous button */}
+                <button
+                    className="btn btn-outline px-4 py-2 bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 disabled:opacity-50"
+                    onClick={handlePrevious}
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </button>
+
+                {/* Page number buttons */}
                 {pageNumber}
+
+                {/* Next button */}
+                <button
+                    className="btn btn-outline px-4 py-2 bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 disabled:opacity-50"
+                    onClick={handleNext}
+                    disabled={currentPage === totalPage}
+                >
+                    Next
+                </button>
             </div>
         </div>
     );
