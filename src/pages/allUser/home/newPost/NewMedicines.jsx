@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import 'swiper/css';
 import 'swiper/css/bundle';
-import { FaBangladeshiTakaSign } from 'react-icons/fa6';
+import { FaBangladeshiTakaSign} from 'react-icons/fa6';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPublic from '../../../../hooks/useAxiosPublic';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useCardItem from '../../../../hooks/useCardItem';
 import useAllMedicines from '../../../../hooks/useAllMedicines';
 
+import { FcEmptyTrash } from "react-icons/fc";
 const NewMedicines = () => {
     const [refetch, allCardItem] = useCardItem();
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ const NewMedicines = () => {
     });
 
     const [doctors] = useAllMedicines();
-    const lastFiveItems = doctors.slice(-5); // Get last five items
+    const lastFiveItems = doctors.slice(-6); // Get last five items
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
@@ -87,19 +88,22 @@ const NewMedicines = () => {
                     New Medicines
                 </h1>
             </div>
-
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 justify-items-center items-center">
-                {displayedItems.map((item, index) => (
+            {lastFiveItems ? <><div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 justify-items-center items-center">
+                {lastFiveItems.map((item, index) => (
                     <MedicineCard key={`${item._id}-${index}`} item={item} onAddCard={handleAddCard} index={index} />
                 ))}
-            </div>
+            </div></> :
+                <>
+                    <div className='flex flex-col  justify-center items-center'>
+                        <FcEmptyTrash className='text-4xl' />
+                        <h1 className='text-red-500'>Empty</h1>
+                    </div>
+
+                </>}
+
 
             {/* Pagination (for demonstration, add your pagination logic here) */}
-            <div className="flex justify-center mt-4">
-                <button className="btn btn-outline">Previous</button>
-                <span className="mx-2">1</span>
-                <button className="btn btn-outline">Next</button>
-            </div>
+
         </div>
     );
 };

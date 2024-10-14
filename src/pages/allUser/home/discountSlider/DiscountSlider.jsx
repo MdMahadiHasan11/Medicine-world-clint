@@ -1,18 +1,16 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useQuery } from '@tanstack/react-query';
 import 'swiper/css';
+import 'swiper/css/pagination';  // Import Swiper CSS for pagination
 import 'swiper/css/bundle';
-import { Autoplay } from 'swiper/modules'; // Removed Pagination and kept Autoplay
+import { Autoplay, Pagination } from 'swiper/modules'; // Include Pagination module
 import useAxiosPublic from '../../../../hooks/useAxiosPublic';
-import { FaBangladeshiTakaSign, FaEye } from 'react-icons/fa6';
+import { FaBangladeshiTakaSign } from 'react-icons/fa6';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
 import useCardItem from '../../../../hooks/useCardItem';
-import MedicinesDetails from '../../medicineShop/MedicinesDetails';
-import { useState } from 'react';
-import DiscountSliderViewDetails from './DiscountSliderViewDetails';
 
 const DiscountSlider = () => {
     const [refetch, allCardItem] = useCardItem();
@@ -75,8 +73,6 @@ const DiscountSlider = () => {
         }
     };
 
-    const [modal, setModal] = useState(false)
-
     return (
         <div className=''>
             <div className='flex justify-center mx-auto items-center'>
@@ -91,41 +87,37 @@ const DiscountSlider = () => {
                 </h1>
             </div>
             <Swiper
-                spaceBetween={20} // Increase space between slides for cleaner look
-                pagination={false} // Disable pagination (slider points)
-                modules={[Autoplay]} // Only Autoplay module is used
+                spaceBetween={20}
+                pagination={{ clickable: true }}
+                modules={[Autoplay, Pagination]} // Added Pagination module
                 loop={true}
                 autoplay={{
-                    delay: 3000, // 3 seconds
-                    disableOnInteraction: false, // Allow autoplay to continue after interactions
+                    delay: 2000, // 2-second autoplay delay
+                    disableOnInteraction: false,
                 }}
                 breakpoints={{
-                    // Responsive breakpoints
                     1024: {
-                        slidesPerView: 3, // 3 slides on large screens
+                        slidesPerView: 3,
                     },
                     768: {
-                        slidesPerView: 2, // 2 slides on medium screens
+                        slidesPerView: 2,
                     },
                     640: {
-                        slidesPerView: 1, // 1 slide on small screens
+                        slidesPerView: 1,
                     },
                 }}
-                className='mySwiper'
+                className='mySwiper mt-4' // Added margin-top
             >
                 {disMedicines.map((item) => (
-                    <SwiperSlide key={item._id} className="flex items-center justify-center"> {/* Removed padding and margin from each slide */}
-                        <div className="hero cardStyle border rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-row gap-4 p-6 max-w-lg"> {/* Added padding and consistent card styling */}
-                            {/* Image on the left */}
+                    <SwiperSlide key={item._id} className="flex items-center justify-center">
+                        <div className="hero cardStyle border rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-row gap-4 p-6 max-w-lg">
                             <img
                                 src={item.image}
-                                className="md:max-w-[130px] max-w-[120px] h-[150px] rounded-lg shadow-md" // Reduced size
+                                className="md:max-w-[130px] max-w-[120px] h-[150px] rounded-lg shadow-md"
                                 alt={item.medicinesName}
                             />
-
-                            {/* Text on the right */}
                             <div className="flex-grow flex flex-col justify-between">
-                                <div className=""> {/* Added margin to space the content */}
+                                <div className="">
                                     <div className="flex justify-between">
                                         <div className="flex gap-2 items-center">
                                             <h2 className="text-lg font-medium">{item.medicinesName}</h2>
@@ -145,30 +137,23 @@ const DiscountSlider = () => {
                                         <p className=""><FaBangladeshiTakaSign /></p>
                                         <p className="">{item.grandTotal}</p>
                                     </div>
-
                                 </div>
                                 <div className='mt-3'>
                                     <Link
                                         to="/discountSliderViewDetails"
-                                        state={{ requestItem: item }}  // Passing item in the state
+                                        state={{ requestItem: item }}
                                         className='btn btn-outline hover:bg-primary transition-colors duration-200 text-primary font-semibold mr-2 md:mb-2'>
                                         View
                                     </Link>
-
                                     <button onClick={() => handleAddCard(item)} className='btn btn-outline hover:bg-primary transition-colors duration-200 text-primary font-semibold'>Add to Card</button>
-
                                 </div>
                             </div>
                         </div>
-                        {/* {modal && <MedicinesDetails requestItem={item} onClose={() => setModal(false)}></MedicinesDetails>} */}
-
                     </SwiperSlide>
-
-
                 ))}
             </Swiper>
-
-
+            {/* Add margin to pagination */}
+            <div className="swiper-pagination mt-2" />
         </div>
     );
 };

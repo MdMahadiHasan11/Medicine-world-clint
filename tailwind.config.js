@@ -10,8 +10,8 @@ export default {
         primary: 'var(--primary-color)',
         accent: 'var(--accent-color)',
         background: 'var(--bg-color)',
-        cardStyle: 'var(--card-bg-color)', // Card background color
-        navbarStyle: 'var(--navbar-bg-color)', // Navbar background color
+        cardStyle: 'var(--cardStyle-bg-color)', // Corrected to match your CSS variable name
+        navbarStyle: 'var(--navbarStyle-bg-color)', // Corrected to match your CSS variable name
         text: 'var(--text-color)',
       },
     },

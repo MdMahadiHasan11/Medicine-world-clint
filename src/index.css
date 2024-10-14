@@ -6,23 +6,22 @@
     --bg-color: #f0f4f8;         /* Light Theme Background */
     --text-color: #333333;       /* Light Theme Text */
     --primary-color: #007bff;    /* Light Theme Primary */
-    --accent-color: #ff5722;      /* Light Theme Accent */
-    --cardStyle-bg-color: #ffffff;     /* Card Background */
-    --navbarStyle-bg-color: linear-gradient(135deg, #1E40AF, #3B82F6); /* Slightly adjusted for lightness */
-    /* Navbar Background - Midnight Blue */
-    --navbar-text-color: #ffffff; /* Navbar text color for better contrast */
-    --card-text-color: #2c3e50;   /* Card text color for improved readability */
+    --accent-color: #ff5722;     /* Light Theme Accent */
+    --cardStyle-bg-color: #ffffff; /* Card Background */
+    --navbarStyle-bg-color: linear-gradient(135deg, #1E40AF, #3B82F6); /* Navbar Background */
+    --navbar-text-color: #ffffff; /* Navbar text color */
+    --card-text-color: #2c3e50;   /* Card text color */
     --button-text-color: #ffffff;  /* Button text color */
     --button-hover-text-color: #ffffff; /* Button hover text color */
 }
-  
+
 [data-theme='dark'] {
     --bg-color: #121212;         /* Dark Theme Background */
     --text-color: #e0e0e0;       /* Dark Theme Text */
     --primary-color: #3b82f6;    /* Dark Theme Primary */
     --accent-color: #ff8a65;      /* Dark Theme Accent */
-    --cardStyle-bg-color: #1e1e1e;    /* Dark Theme Card Background */
-    --navbarStyle-bg-color: linear-gradient(135deg, #2D2D2D, #4B5563); /* Dark Theme Navbar Background - Dynamic */
+    --cardStyle-bg-color: #1e1e1e; /* Dark Theme Card Background */
+    --navbarStyle-bg-color: linear-gradient(135deg, #2D2D2D, #4B5563); /* Dark Theme Navbar Background */
     --navbar-text-color: #ffffff; /* Dark Navbar text color */
     --card-text-color: #ecf0f1;   /* Light text for card readability in dark mode */
 }
@@ -30,13 +29,13 @@
 /* Navbar styling */
 .navbarStyle {
     background: var(--navbarStyle-bg-color);
-    color: var(--navbar-text-color); /* Updated navbar text color */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+    color: var(--navbar-text-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Optional hover effect for the navbar */
 .navbarStyle:hover {
-    background: rgba(70, 130, 180, 0.9); /* Lighter shade on hover */
+    background: rgba(70, 130, 180, 0.9);
 }
 
 /* General body styling */
@@ -48,7 +47,7 @@ body {
 /* Card styling */
 .cardStyle {
     background-color: var(--cardStyle-bg-color);
-    color: var(--card-text-color); /* Updated card text color for readability */
+    color: var(--card-text-color);
 }
 
 /* Heading styling */
@@ -59,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Example for accent color */
 .btn-accent {
     background-color: var(--accent-color);
-    color: var(--button-text-color); /* Updated button text color */
+    color: var(--button-text-color);
 }
 
 /* Additional styling for buttons */
@@ -67,16 +66,44 @@ button {
     border: 2px solid var(--primary-color);
     border-radius: 4px;
     padding: 10px 20px;
-    background-color: transparent; /* For button styles */
-    color: var(--button-text-color); /* Button text color */
+    background-color: transparent;
+    color: var(--button-text-color);
     cursor: pointer;
 }
 
 /* Button hover effects */
 button:hover {
     background-color: var(--primary-color);
-    color: var(--button-hover-text-color); /* Button hover text color */
+    color: var(--button-hover-text-color);
 }
 
+/* Custom styles for the Medicines Table */
+.table-style {
+    width: 100%;
+    border-collapse: collapse;
+}
 
+.table-style th, .table-style td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--primary-color);
+}
 
+.table-style th {
+    background-color: var(--cardStyle-bg-color);
+    color: var(--primary-color);
+}
+
+.table-style tbody tr:nth-child(even) {
+    background-color: rgba(200, 200, 200, 0.3); /* Light gray for even rows */
+}
+
+.table-style tbody tr:hover {
+    background-color: rgba(200, 200, 200, 0.1); /* Highlight on hover */
+}
+
+.table-style .btn-accent {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+}

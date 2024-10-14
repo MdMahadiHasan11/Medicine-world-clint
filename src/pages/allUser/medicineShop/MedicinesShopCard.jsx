@@ -63,51 +63,45 @@ const MedicinesShopCard = ({ requestItem, index }) => {
 
     return (
         <>
-            <tr className="hover:bg-gray-100 border-b border-gray-200">
-                <td className="px-4 py-4 text-center">{index + 1}</td>
-                <td className="px-4 py-4">
-                    {requestItem.medicinesName}{" "}
-                    <span className="text-xs text-gray-500">({requestItem.massUnit})</span>
-                </td>
-                <td className="px-4 py-4 text-center">{requestItem.genericName}</td>
-                <td className="px-4 py-4 text-center">{requestItem.category}</td>
-                <td className="px-4 py-4 text-center">
-                    <p className="flex items-center justify-center">
-                        <FaBangladeshiTakaSign className="mr-1" /> {requestItem.perUnitPrice}
-                    </p>
-                </td>
-                <td className="px-4 py-4 text-center">{requestItem.discountPercentage}%</td>
-                <td className="px-4 py-4 text-center">
-                    <p className="flex items-center justify-center">
-                        <FaBangladeshiTakaSign className="mr-1" /> {requestItem.grandTotal}
-                    </p>
-                </td>
-                <td className="px-4 py-4 text-center">
-                    <div className="flex justify-center items-center gap-2">
-                        <button
-                            onClick={() => handleAddCard(requestItem)}
-                            className="btn btn-outline btn-primary flex items-center gap-2 px-4 py-2 font-bold"
-                        >
-                            <MdOutlineAddShoppingCart className="text-lg" /> Add to Cart
-                        </button>
-                        <button
-                            onClick={() => setModal(true)}
-                            className="btn btn-outline btn-secondary flex items-center gap-2 px-4 py-2 font-bold"
-                        >
-                            <FaEye className="text-lg" /> View
-                        </button>
+            <tr className="tableStyle">
+                <td className="px-2 py-4 text-center text-xs md:text-sm">{index + 1}</td>
+                <td className="px-2 py-4 text-center text-xs md:text-sm ">{requestItem.medicinesName}</td>
+                <td className="px-2 py-4 text-center text-xs md:text-sm">{requestItem.category}</td>
+                <td className="px-2 py-4 text-center text-xs md:text-sm">
+                    <div className="flex items-center justify-center">
+                        <p className="flex items-center">
+                        <FaBangladeshiTakaSign className="text-xs md:text-sm" />
+                            <sub><del>{requestItem.perUnitPrice}</del></sub>
+                            <span className="ml-1 text-xs md:text-sm font-semibold">{requestItem.grandTotal}</span>
+                        </p>
                     </div>
+                </td>
+                <td className="px-2 py-4 text-center text-xs md:text-sm flex justify-center items-center gap-1">
+                    <button
+                        onClick={() => handleAddCard(requestItem)}
+                        className="btn btn-outline hover:bg-primary transition-colors duration-200 text-primary font-semibold"
+                    >
+                        <MdOutlineAddShoppingCart className="text-lg" />
+                        <span className="hidden md:inline">Add to Cart</span>
+                    </button>
+                    <button
+                        onClick={() => setModal(true)}
+                        className="btn btn-outline hover:bg-primary transition-colors duration-200 text-primary font-semibold"
+                        aria-label={`View details for ${requestItem.medicinesName}`}
+                    >
+                        <FaEye className="text-lg" />
+                        <span className="hidden md:inline">View</span>
+                    </button>
                 </td>
             </tr>
 
             {/* Modal for Medicine Details */}
             {modal && (
-                <div >
-                    <MedicinesDetails  className="my-16 border border-red-500 "
-                        requestItem={requestItem}
-                        onClose={() => setModal(false)}
-                    />
-                </div>
+                <MedicinesDetails
+                    className="my-16 border border-red-500"
+                    requestItem={requestItem}
+                    onClose={() => setModal(false)}
+                />
             )}
         </>
     );
