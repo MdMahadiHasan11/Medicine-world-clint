@@ -29,6 +29,7 @@ import UserDashboard from "../userDashboard/UserDashboard";
 import SellerDashboardRevenue from "../../pages/seller/dashboard/SellerDashboardRevenue";
 import AdminRevenue from "../../pages/admin/revenue/AdminRevenue";
 import DiscountSliderViewDetails from "../../pages/allUser/home/discountSlider/DiscountSliderViewDetails";
+import ProfileUpdate from "../../pages/allUser/Profile/ProfileUpdate";
 // import Shop from "../../pages/allUser/shop/Shop";
 
 
@@ -75,6 +76,10 @@ const Router = createBrowserRouter([
             {
                 path: "/discountSliderViewDetails",
                 element:<DiscountSliderViewDetails></DiscountSliderViewDetails>,
+            },
+            {
+                path: "/updateProfile",
+                element:<PrivateRoute><ProfileUpdate></ProfileUpdate></PrivateRoute>,
             },
         ]
     },

@@ -19,7 +19,7 @@ const useAllMedicines = () => {
 
 
 
-    const axiosPublic =useAxiosPublic()
+    const axiosPublic =useAxiosPublic();
 
     const {data : doctors =[] , isPending : loading ,refetch } = useQuery({
         queryKey:['doctors'],

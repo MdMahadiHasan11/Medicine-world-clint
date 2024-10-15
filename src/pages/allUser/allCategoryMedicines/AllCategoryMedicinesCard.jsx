@@ -135,7 +135,7 @@ const AllCategoryMedicinesCard = ({ requestItem, index }) => {
         //     </tr>
         //     {modal && <MedicinesDetails requestItem={requestItem} onClose={() => setModal(false)}></MedicinesDetails>}
         // </tbody>
-        <tbody className=''>
+        // <tbody className=''>
             <tr className="hover">
                 <td >
                     {index + 1}
@@ -184,7 +184,7 @@ const AllCategoryMedicinesCard = ({ requestItem, index }) => {
                 {modal && <MedicinesDetails requestItem={requestItem} onClose={() => setModal(false)}></MedicinesDetails>}
             </tr>
 
-        </tbody>
+        // </tbody>
     );
 };
 
