@@ -63,13 +63,13 @@ const SignUp = () => {
 
             createUser(email, password)
                 .then(() => {
-                    const photoUrl =res.data.data.display_url;
+                    const photoUrl = res.data.data.display_url;
                     updateUserProfile(name, photoUrl, role)
                         .then(() => {
                             // create user entry in the dataBase
                             const userInfo = {
                                 name: name,
-                                image:photoUrl,
+                                image: photoUrl,
                                 email: email,
                                 role: role,
                             }
@@ -107,7 +107,7 @@ const SignUp = () => {
 
     return (
         <div className="min-h-screen hero-overlay bg-opacity-60" style={{ backgroundImage: 'url(https://i.ibb.co/x6XV8X9/re.jpg)' }}>
-            
+
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Sign Up</title>
@@ -124,7 +124,7 @@ const SignUp = () => {
             <div className="mt-10 pb-10 justify-center items-center min-h-[calc(100vh-306px)] w-full">
 
                 <div className=" p-2 md:p-6 mx-auto bg-white rounded-md w-1/2 shadow-2xl ">
-                <p className="text-center text-4xl font-bold">Sign Up</p>
+                    <p className="text-center text-4xl font-bold">Sign Up</p>
                     <div className="text-center lg:text-left">
                         {/* <div className="flex justify-center items-center">
                             <h1 className="text-5xl font-bold"><Fade>Register!</Fade></h1>
