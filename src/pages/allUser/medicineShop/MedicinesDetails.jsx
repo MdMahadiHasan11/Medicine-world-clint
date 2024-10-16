@@ -34,16 +34,16 @@ const MedicinesDetails = ({ requestItem, onClose }) => {
                     X
                 </button>
                 
-                <div className='rounded-lg flex flex-col gap-5 items-center mx-4'>
+                <div className='rounded-md flex flex-col gap-4 items-center mx-4'>
                     {/* Modal content */}
                     <div className="card max-w-96 bg-base-100 shadow-xl">
-                        <figure className="px-10 pt-10">
-                            <img className="w-80 h-52" src={requestItem.image} alt={requestItem.medicinesName} />
+                        <figure className="px-5 pt-5">
+                            <img className="md:w-80 w-72 md:h-52 h-44" src={requestItem.image} alt={requestItem.medicinesName} />
                         </figure>
                         <div className="card-body">
                             <div className="flex justify-between">
                                 <div className="flex gap-2 items-center">
-                                    <h2 className="font-bold text-3xl">{requestItem.medicinesName}</h2>
+                                    <h2 className="font-bold md:text-3xl text-xl">{requestItem.medicinesName}</h2>
                                     <sub>{requestItem.massUnit}</sub>
                                 </div>
                             </div>
@@ -62,18 +62,18 @@ const MedicinesDetails = ({ requestItem, onClose }) => {
                                     </div>
 
                                     <div className="flex justify-center items-center">
-                                        <p className="text-xl font-bold"><FaBangladeshiTakaSign /></p>
-                                        <p className="text-xl font-bold">{requestItem.grandTotal}</p>
+                                        <p className="text font-bold"><FaBangladeshiTakaSign /></p>
+                                        <p className="text font-bold">{requestItem.grandTotal}</p>
                                     </div>
                                 </div>
                             </div>
                             <hr className="border-t border-gray-300 my-2" />
                             <div className="flex font-semibold justify-between text-xs">
                                 <p>Category: {requestItem.category}</p>
-                                <p>Company: {requestItem.company}</p>
+                                {/* <p>Company: {requestItem.company}</p> */}
                             </div>
-                            <p className="text-sm font-medium">{requestItem.description}</p>
-                            <hr className="border-t border-gray-300 my-4" />
+                            <p className="text-xs md:text-base font-medium">{requestItem.description}</p>
+                            <hr className="border-t border-gray-300 my-2" />
                         </div>
                     </div>
                 </div>

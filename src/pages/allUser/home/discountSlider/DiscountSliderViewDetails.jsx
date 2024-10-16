@@ -77,9 +77,9 @@ const DiscountSliderViewDetails = () => {
         <div className="min-h-screen flex items-center cardStyle  justify-center border p-4">
             <div className="max-w-4xl w-full rounded-lg shadow-lg border flex flex-col lg:flex-row overflow-hidden">
                 {/* Hero Image with Fixed Height */}
-                <div className="lg:w-1/2 h-96 relative overflow-hidden shadow-lg rounded-lg"> {/* Shadow and rounded corners */}
+                <div className="md:w-1/2 md:h-96  h-64 relative overflow-hidden shadow-lg rounded-lg"> {/* Shadow and rounded corners */}
                     <img
-                        className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                        className="w-full h-full s transition-transform duration-300 ease-in-out hover:scale-105"
                         src={requestItem.image}
                         alt={requestItem.medicinesName}
                     />

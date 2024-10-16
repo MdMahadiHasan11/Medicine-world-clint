@@ -1,28 +1,26 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../routes/authProvider/AuthProvider";
-import { CgProfile } from "react-icons/cg";
-import { FaCartShopping, FaRegUser } from "react-icons/fa6";
-import { Tooltip } from "react-tooltip";
-import useCardItem from "../../hooks/useCardItem";
+import { FaCartShopping } from "react-icons/fa6";
 import logo1 from '../../../public/image/logo1.png';
 import { GrLanguage } from "react-icons/gr";
 import useAdmin from "../../hooks/useAdmin";
 import useSeller from "../../hooks/useSeller";
+import useCardItem from "../../hooks/useCardItem";
 
 const Navbar = () => {
     const [isAdmin] = useAdmin();
     const [isSeller] = useSeller();
     const [refetch, allCardItem] = useCardItem();
     const { user, logOut } = useContext(AuthContext);
+    const dropdownRef = useRef(null); // to handle click outside dropdown
 
     const handleSignOut = () => {
         logOut().catch(err => console.error(err));
     };
 
-    const [theme, setTheme] = useState(
-        localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-    );
+    // Theme state and toggle logic
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
     const handleToggle = (e) => {
         setTheme(e.target.checked ? "dark" : "light");
@@ -33,85 +31,104 @@ const Navbar = () => {
         document.querySelector("html").setAttribute("data-theme", theme);
     }, [theme]);
 
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
     const links = (
         <>
             <li className="font-bold">
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/" className="hover:text-primary">Home</NavLink>
             </li>
             <li className="font-bold">
-                <NavLink to="/shop">Shop</NavLink>
+                <NavLink to="/shop" className="hover:text-primary">Shop</NavLink>
             </li>
-            <li className="font-bold">
-                <NavLink to="card">
+            <li className="font-bold relative">
+                <NavLink to="/card" className="hover:text-primary flex items-center gap-2">
                     <FaCartShopping />
-                    <span>{allCardItem.length}</span>
+                    {allCardItem.length > 0 && <sup className="bg-red-600 text-white rounded-full px-2">{allCardItem.length}</sup>}
                 </NavLink>
             </li>
         </>
     );
 
     return (
-        <div className="navbar bg-navbar navbarStyle   max-w-screen-xl ">
+        <div className="navbar bg-navbar max-w-screen-xl mx-auto px-4">
+            {/* Navbar Start */}
             <div className="navbar-start flex items-center">
-                <NavLink to="/" className="flex justify-center pl-10 items-center font-bold lg:text-3xl md:text-2xl">
+                <NavLink to="/" className="flex items-center font-bold lg:text-3xl md:text-2xl">
                     <img className="md:w-24 w-16 md:h-20 h-14" src={logo1} alt="Logo" />
                 </NavLink>
             </div>
-            <div className="navbar-center">
-                <ul className="menu menu-horizontal px-1 text-lg">
+
+            {/* Navbar Center - Links */}
+            <div className="navbar-center hidden md:flex">
+                <ul className="menu menu-horizontal px-1 text-lg space-x-4">
                     {links}
                 </ul>
             </div>
+
+            {/* Navbar End */}
             <div className="navbar-end flex items-center">
+                {/* User Authentication Dropdown */}
                 {user ? (
-                    <div className="dropdown mr-4 dropdown-end">
-                        <div tabIndex={0} role="button" className="font-bold text-lg">
-                            <div data-tooltip-id="my-tooltip" className="relative group">
-                                <img src={user.photoURL ? user.photoURL : `https://i.ibb.co/qW320MT/images.jpg`} className="rounded-full w-10 h-10" alt="User" />
-                            </div>
+                    <div className="dropdown relative" ref={dropdownRef}>
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            className="flex items-center gap-2 cursor-pointer"
+                            onClick={() => setDropdownOpen(!dropdownOpen)}
+                        >
+                            <img
+                                src={user.photoURL ? user.photoURL : `https://i.ibb.co/qW320MT/images.jpg`}
+                                className="rounded-full w-10 h-10"
+                                alt="User"
+                            />
                         </div>
-                        <ul tabIndex={0} className={`menu dropdown-content z-[10] p-2 shadow ${theme === 'dark' ? 'bg-base-300' : 'bg-base-300 text-black'} rounded-box w-52 mt-4`}>
-                            {isAdmin ? (
-                                <>
-                                    <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
-                                    <li className="font-bold"><NavLink to="/adminDashboard">Admin Dashboard</NavLink></li>
-                                    <li className="font-bold"><button onClick={handleSignOut}>Log Out</button></li>
-                                </>
-                            ) : isSeller ? (
-                                <>
-                                    <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
-                                    <li className="font-bold"><NavLink to="/sellerDashboard">Seller Dashboard</NavLink></li>
-                                    <li className="font-bold"><button onClick={handleSignOut}>Log Out</button></li>
-                                </>
-                            ) : (
-                                <>
-                                    <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
-                                    <li className="font-bold"><NavLink to="/userDashboard">User Dashboard</NavLink></li>
-                                    <li className="font-bold"><button onClick={handleSignOut}>Log Out</button></li>
-                                </>
-                            )}
-                        </ul>
+                        {dropdownOpen && (
+                            <ul
+                                className={`menu dropdown-content z-20 p-2 shadow-lg ${theme === 'dark' ? 'bg-base-300 text-white' : 'bg-white text-black'} rounded-box w-52 mt-4 absolute right-0`}
+                            >
+                                {isAdmin ? (
+                                    <>
+                                        <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
+                                        <li className="font-bold"><NavLink to="/adminDashboard">Admin Dashboard</NavLink></li>
+                                        <li className="font-bold"><button onClick={handleSignOut}>Log Out</button></li>
+                                    </>
+                                ) : isSeller ? (
+                                    <>
+                                        <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
+                                        <li className="font-bold"><NavLink to="/sellerDashboard">Seller Dashboard</NavLink></li>
+                                        <li className="font-bold"><button onClick={handleSignOut}>Log Out</button></li>
+                                    </>
+                                ) : (
+                                    <>
+                                        <li className="font-bold"><NavLink to="/updateProfile">Update Profile</NavLink></li>
+                                        <li className="font-bold"><NavLink to="/userDashboard">User Dashboard</NavLink></li>
+                                        <li className="font-bold"><button onClick={handleSignOut}>Log Out</button></li>
+                                    </>
+                                )}
+                            </ul>
+                        )}
                     </div>
                 ) : (
-                    <span>
-                        <button className="px-5 md:mr-4 font-bold md:text-lg">
-                            <NavLink to="/login">Join Us</NavLink>
-                        </button>
-                        <button className="font-bold md:mr-4 text-xl">
-                            <NavLink to="/signUp"><FaRegUser /></NavLink>
-                        </button>
-                    </span>
-                )}
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="m-1 mx-2 text-2xl">
-                        <GrLanguage />
+                    <div className="mr-4 font-bold">
+                        <NavLink to="/login" className="hover:text-primary">Join Us</NavLink>
                     </div>
-                    <ul tabIndex={0} className={`dropdown-content z-10 font-bold menu p-2 shadow ${theme === 'dark' ? 'bg-base-100' : 'text-black bg-base-100'} rounded-box w-24`}>
-                        <li><a>English</a></li>
-                        <li><a>Hindi</a></li>
-                        <li><a>Bangla</a></li>
-                    </ul>
-                </div>
+                )}
+
+                {/* Theme Toggle */}
                 <label className="swap mr-4 ml-2 swap-rotate">
                     <input type="checkbox" onChange={handleToggle} checked={theme === "dark"} />
                     <svg className="swap-on fill-current w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

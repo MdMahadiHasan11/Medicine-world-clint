@@ -91,7 +91,7 @@ const AllCategoryMedicine = () => {
             </Helmet>
 
             {/* Navbar and Search Section */}
-            <div className="navbar max-w-screen-xl border rounded-lg shadow-md mx-auto md:px-20 px-14 p-2">
+            <div className="navbar max-w-screen-xl border rounded-lg shadow-md mx-auto md:px-20 px-4 p-2">
                 <div className="flex-1">
                     <form className="flex items-center">
                         <label className="input input-bordered flex items-center gap-2 border-gray-300 hover:border-blue-500 focus-within:border-blue-500 transition duration-200">

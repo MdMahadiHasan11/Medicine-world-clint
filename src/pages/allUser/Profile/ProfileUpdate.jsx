@@ -1,36 +1,42 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
-import { HelmetProvider, Helmet } from "react-helmet-async"; // Use HelmetProvider and Helmet from react-helmet-async
-import { AuthContext } from "../../../routes/authProvider/AuthProvider";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
+import useUserDetails from "../../../hooks/useUserDetails";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const ProfileUpdate = () => {
-    const { user } = useContext(AuthContext);
+    const { user } = useAuth();
+    const { userInfo, refetch, isLoading, isError, error } = useUserDetails();
+    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+    
     const { register, handleSubmit, setValue } = useForm({
         defaultValues: {
-            name: user.displayName || "", // Set the default value for name
-            image: user.photoURL || "", // Set the default value for image
+            name: userInfo.name || "",
+            image: userInfo.image || "",
         },
     });
-    const axiosPublic = useAxiosPublic(); // Make sure to import this hook
-    const axiosSecure = useAxiosSecure(); // Make sure to import this hook
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    if (isError) {
+        return <div>Error: {error.message}</div>;
+    }
 
-
-    const onSubmit = async (data) => { // Marked as async
-        const { name = name, image = image } = data;
-        const image_file = { image: data.image[0] };
+    const onSubmit = async (data) => {
+        const { name = userInfo.name, image = userInfo.image } = data;
+        const image_file = data.image[0];
 
         try {
-
-
             let updateUser = {
                 image: image,
                 name: name,
@@ -38,31 +44,36 @@ const ProfileUpdate = () => {
             };
             console.log(updateUser)
 
-            if (user.photoURL == image && name == user.displayName) {
-                console.log("no update")
-            }
-            else if (name == user.displayName) {
-                const res = await axiosPublic.post(image_hosting_api, image_file, {
+            if ((!image && !name ) || (!image && name==userInfo.name )) {
+                console.log("No update needed");
+            } else if (image) {
+                console.log("only name && image or must image ")
+                const formData = new FormData();
+                formData.append("image", image_file);
+
+                const res = await axiosPublic.post(image_hosting_api, formData, {
                     headers: {
-                        'content-type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data'
                     }
                 });
+
                 const imageUrl = res.data.data.display_url;
 
-                if (res.data.success) {
+                console.log(imageUrl);
 
+                if (res.data.success) {
                     updateUser = {
                         image: imageUrl,
-                        name: name,
-                        email: user.email // Add the email property here
+                        name: userInfo.name,
+                        email: user.email
                     };
 
-                    console.log("Updating user:", updateUser); // Log the data being sent
+                    console.log("only name && image or must image ");
+                    console.log(updateUser);
 
-                    axiosPublic.post('/userUpdate', updateUser)
+                    axiosPublic.post('/user', updateUser)
                         .then(res => {
-                            console.log("Response:", res.data); // Log the server's response
-                            if (res.data.updated) {
+                            if (res.data.modifiedCount) {
                                 Swal.fire({
                                     position: "top-center",
                                     icon: "success",
@@ -74,14 +85,13 @@ const ProfileUpdate = () => {
                                 Swal.fire({
                                     position: "top-center",
                                     icon: "error",
-                                    title: res.data.message, // Use the server's message
+                                    title: res.data.message,
                                     showConfirmButton: false,
                                     timer: 2500
                                 });
                             }
                         })
                         .catch(err => {
-                            console.error("Error updating profile:", err);
                             Swal.fire({
                                 position: "top-center",
                                 icon: "error",
@@ -90,24 +100,19 @@ const ProfileUpdate = () => {
                                 timer: 2500
                             });
                         });
-
-
                 }
-
-
             } else {
                 updateUser = {
-                    image: image,
+                    image: userInfo.image,
                     name: name,
-                    email: user.email // Add the email property here
+                    email: user.email
                 };
 
-                console.log("Updating user:", updateUser); // Log the data being sent
-
-                axiosPublic.post('/userUpdate', updateUser)
+                console.log("only name ")
+                console.log(updateUser)
+                axiosPublic.post('/user', updateUser)
                     .then(res => {
-                        console.log("Response:", res.data); // Log the server's response
-                        if (res.data.updated) {
+                        if (res.data.modifiedCount) {
                             Swal.fire({
                                 position: "top-center",
                                 icon: "success",
@@ -119,14 +124,13 @@ const ProfileUpdate = () => {
                             Swal.fire({
                                 position: "top-center",
                                 icon: "error",
-                                title: res.data.message, // Use the server's message
+                                title: res.data.message,
                                 showConfirmButton: false,
                                 timer: 2500
                             });
                         }
                     })
                     .catch(err => {
-                        console.error("Error updating profile:", err);
                         Swal.fire({
                             position: "top-center",
                             icon: "error",
@@ -136,10 +140,8 @@ const ProfileUpdate = () => {
                         });
                     });
             }
-
         } catch (error) {
-            console.error("Error updating profile:", error);
-            toast.error("Failed to update profile."); // Display error message
+            toast.error("Failed to update profile.");
         }
     };
 
@@ -153,13 +155,13 @@ const ProfileUpdate = () => {
 
                 <div className="flex flex-col justify-center items-center">
                     <p className="font-bold text-5xl">
-                        Hello, <span className="text-cyan-600">{user.displayName}</span>
+                        Hello, <span className="text-cyan-600">{userInfo.name}</span>
                     </p>
                     <p className="mt-6 mb-12 font-medium">
                         Please update your profile
                     </p>
                     <img
-                        src={user.photoURL ? user.photoURL : `https://i.ibb.co/qW320MT/images.jpg`}
+                        src={userInfo.image || `https://i.ibb.co/qW320MT/images.jpg`}
                         className="rounded-full w-28 h-28"
                     />
                     <p className="font-bold my-2">{user.email}</p>
@@ -186,7 +188,7 @@ const ProfileUpdate = () => {
                                 <input
                                     {...register("image")}
                                     type="file"
-                                    className="file-input file-input-bordered w-full "
+                                    className="file-input file-input-bordered w-full"
                                 />
                             </label>
                         </div>
