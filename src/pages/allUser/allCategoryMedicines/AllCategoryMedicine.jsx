@@ -91,13 +91,13 @@ const AllCategoryMedicine = () => {
             </Helmet>
 
             {/* Navbar and Search Section */}
-            <div className="navbar max-w-screen-xl border rounded-lg shadow-md mx-auto md:px-20 px-4 p-2">
+            <div className="navbar  border rounded-lg shadow-md mx-auto md:px-20 px-4 p-2">
                 <div className="flex-1">
                     <form className="flex items-center">
                         <label className="input input-bordered flex items-center gap-2 border-gray-300 hover:border-blue-500 focus-within:border-blue-500 transition duration-200">
                             <input
                                 type="text"
-                                className="grow py-2 px-3 bg-transparent  placeholder-gray-400 focus:outline-none"
+                                className="grow py-1 md:py-2 px-2 md:px-3 bg-transparent placeholder-gray-400 focus:outline-none" // Adjusted padding for smaller screens
                                 value={searchText}
                                 onChange={(e) => setSearchText(e.target.value)}
                                 placeholder="Search"
@@ -119,25 +119,30 @@ const AllCategoryMedicine = () => {
                 </div>
 
                 {/* Sort Dropdown */}
-                <div className="flex items-center z-10 ml-10">
-                    <details className="dropdown">
-                        <summary className="m-1 btn flex items-center border border-gray-300 hover:bg-gray-200 rounded-md transition duration-200 ">
-                            Sort <IoIosArrowDown className="ml-1" />
-                        </summary>
-                        <ul className="p-2 shadow-lg menu dropdown-content z-10 bg-white rounded-box py-2 px-5">
-                            <li onClick={() => handleDisplaySort('Ascending')}>
-                                <a className="hover:bg-gray-200 rounded-md py-1 px-2 transition duration-200 text-gray-700">
-                                    Ascending
-                                </a>
-                            </li>
-                            <li className="border-t-2" onClick={() => handleDisplaySort('Descending')}>
-                                <a className="hover:bg-gray-200 rounded-md py-1 px-2 transition duration-200 text-gray-700">
-                                    Descending
-                                </a>
-                            </li>
-                        </ul>
-                    </details>
+                <div className="flex items-center z-10 ml-2"> {/* Reduced margin here */}
+                    <div className="flex justify-start">
+                        <details className="dropdown">
+                            <summary className="m-1 btn flex items-center border border-gray-300 hover:bg-gray-200 rounded-md transition duration-200">
+                                Sort <IoIosArrowDown className="ml-1" />
+                            </summary>
+                            <ul className="p-2 shadow-lg menu dropdown-content z-10 bg-white rounded-box py-2 px-5 -ml-8"> {/* Increased negative margin */}
+                                <li onClick={() => handleDisplaySort('Ascending')}>
+                                    <a className="hover:bg-gray-200 rounded-md py-1 px-2 transition duration-200 text-gray-700">
+                                        Ascending
+                                    </a>
+                                </li>
+                                <li className="border-t-2" onClick={() => handleDisplaySort('Descending')}>
+                                    <a className="hover:bg-gray-200 rounded-md py-1 px-2 transition duration-200 text-gray-700">
+                                        Descending
+                                    </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
                 </div>
+
+
+
             </div>
 
             {/* Medicine Table Section */}
@@ -177,7 +182,7 @@ const AllCategoryMedicine = () => {
                         </table>
                     </div>
 
-{/* pagination */}
+                    {/* pagination */}
                     <div className="pagination-controls mt-8 flex justify-center items-center gap-2">
                         <button
                             className="btn btn-outline px-4 py-2 disabled:opacity-50"
